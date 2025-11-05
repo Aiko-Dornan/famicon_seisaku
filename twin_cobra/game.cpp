@@ -4,18 +4,23 @@
 #include "game.h"
 #include "function.h"
 #include"player.h"
-
+#include"background.h"
+#include"testenemy.h"
 
 //コンストラクタ
 CGame::CGame(CManager* p) :CScene(p){
 
 	
 
-	map = new CMap();//マップマネージャー生成
-	map->LoadMap();//マップデータの読み込み
-	map->Map_Obj_Creation(base);//マップチップオブジェクト生成
+	//map = new CMap();//マップマネージャー生成
+	//map->LoadMap();//マップデータの読み込み
+	//map->Map_Obj_Creation(base);//マップチップオブジェクト生成
+
+	base.emplace_back((unique_ptr<BaseVector>)new CBackGround());
 
 	base.emplace_back((unique_ptr<BaseVector>)new CPlayer());
+
+	base.emplace_back((unique_ptr<BaseVector>)new CTestEnemy());
 
 }
 

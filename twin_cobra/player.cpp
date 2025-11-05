@@ -1,4 +1,5 @@
 #include"player.h"
+#include"playerbullet.h"
 
 CPlayer::CPlayer()
 {
@@ -12,8 +13,15 @@ CPlayer::CPlayer()
 
 	//pos = _p;//描画位置
 
-	pos.x = 100;
-	pos.y = 100;
+	//pos.x = WINDOW_WIDTH/2;
+	//pos.y = 6000;
+
+	
+
+	m_pos.x = WINDOW_WIDTH / 2;
+	m_pos.y = 6150;
+
+	pos = m_pos;
 
 	//切り取り位置
 	//16はマップチップ画像の横個数
@@ -22,6 +30,8 @@ CPlayer::CPlayer()
 	CutY = (/*_No*/ 7/ 5) * ImgHeight;
 
 	pri = 10;
+
+	ID = PLAYER;
 
 	//tipNo = _No;
 
@@ -45,9 +55,26 @@ int CPlayer::Action(vector<unique_ptr<BaseVector>>& base) {
 	{
 		vec.x += 3.0f;
 	}
+	if (CheckHitKey(KEY_INPUT_SPACE)&&fire_cooldown<0)
+	{
+		base.emplace_back((unique_ptr<BaseVector>)new CPbullet(pos));
+		fire_cooldown = 10;
+	}
+	fire_cooldown--;
 
-	pos.x += vec.x;
-	pos.y += vec.y;
+
+	if (m_pos.x>=WINDOW_WIDTH-ImgWidth)
+	{
+		m_pos.x = WINDOW_WIDTH-ImgWidth;
+	}
+	if (m_pos.x<=0)
+	{
+		m_pos.x = 0;
+
+	}
+
+	m_pos.x += vec.x;
+	m_pos.y += vec.y;
 	
 	vec.x = 0.0f;
 	vec.y = 0.0f;

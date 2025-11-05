@@ -1,4 +1,4 @@
-﻿  player.cpp
-C:\Users\GA2A\Desktop\visual_\twin_cobra\twin_cobra\player.cpp(62,13): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\GA2A\Desktop\visual_\twin_cobra\twin_cobra\player.cpp(62,6): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-  twin_cobra.vcxproj -> C:\Users\GA2A\Desktop\visual_\twin_cobra\x64\Debug\twin_cobra.exe
+﻿  playerbullet.cpp
+C:\Users\GA2A\Desktop\vs_famicon\twin_cobra\playerbullet.cpp(73,23): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\GA2A\Desktop\vs_famicon\twin_cobra\playerbullet.cpp(73,16): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+  twin_cobra.vcxproj -> C:\Users\GA2A\Desktop\vs_famicon\x64\Debug\twin_cobra.exe
