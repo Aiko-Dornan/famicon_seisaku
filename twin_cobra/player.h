@@ -17,6 +17,7 @@ public:
 	Point m_pos{ 0,0 };
 
 	int fire_cooldown{ 10 };
+	int hp{ 10 };
 
 	int tipNo{ -1 };
 };

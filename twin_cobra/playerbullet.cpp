@@ -5,7 +5,10 @@
 
 CPbullet::CPbullet(Point pos)
 {
-	
+	this->pos = pos;
+
+	this->pos.x = pos.x + 15.0f;
+
 	vec.y -= 8.0f;
 
 	ID = PBULLET;
@@ -19,16 +22,7 @@ CPbullet::CPbullet(Point pos)
 int CPbullet::Action(vector<unique_ptr<BaseVector>>&base)
 {
 	CPlayer* p = (CPlayer*)Get_obj(base, PLAYER);
-
-	if (!appear)
-	{
-		
-
-		pos = p->pos;
-
-		appear = true;
-	}
-
+	CEnemyBase* eb = (CEnemyBase*)Get_obj(base, ENEMY);
 	
 	if (pos.y<p->pos.y-WINDOW_HEIGHT)
 	{
@@ -43,7 +37,7 @@ int CPbullet::Action(vector<unique_ptr<BaseVector>>&base)
 	{
 		if ((*i)->ID==ENEMY)
 		{
-			if (HitCheck_box((*i)->pos.x,(*i)->pos.y,pos.x,pos.y,16,16,radius,radius))
+			if (HitCheck_box((*i)->pos.x,(*i)->pos.y,pos.x,pos.y, eb->ImgWidth, eb->ImgHeight,radius,radius))
 			{
 				//‚±‚±‚Å“G‚ÌHP‚ðŒ¸‚ç‚·
 				CEnemyBase* enemy = (CEnemyBase*)Get_obj(base, ENEMY);

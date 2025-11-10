@@ -42,17 +42,17 @@ int CBackGround::Action(vector<unique_ptr<BaseVector>>& base)
     }
 
     // プレイヤーの画面内制限
-    if (p->m_pos.x < camera.x - WINDOW_WIDTH / 2 + p->ImgWidth / 2)
-        p->m_pos.x = camera.x - WINDOW_WIDTH / 2 + p->ImgWidth / 2;
+    if (p->m_pos.x < camera.x - WINDOW_WIDTH / 2 - p->ImgWidth / 2)
+        p->m_pos.x = camera.x - WINDOW_WIDTH / 2 - p->ImgWidth / 2;
 
     if (p->m_pos.x > camera.x + WINDOW_WIDTH / 2 - p->ImgWidth / 2)
         p->m_pos.x = camera.x + WINDOW_WIDTH / 2 - p->ImgWidth / 2;
 
-    if (p->m_pos.y < camera.y - WINDOW_HEIGHT / 2 + p->ImgHeight / 2)
-        p->m_pos.y = camera.y - WINDOW_HEIGHT / 2 + p->ImgHeight / 2;
+    if (p->m_pos.y < camera.y - WINDOW_HEIGHT / 2 - p->ImgHeight / 2)
+        p->m_pos.y = camera.y - WINDOW_HEIGHT / 2 - p->ImgHeight / 2;
 
-    if (p->m_pos.y > camera.y + WINDOW_HEIGHT / 2 - p->ImgHeight / 2)
-        p->m_pos.y = camera.y + WINDOW_HEIGHT / 2 - p->ImgHeight / 2;
+    if (p->m_pos.y > camera.y + WINDOW_HEIGHT / 2 - p->ImgHeight)
+        p->m_pos.y = camera.y + WINDOW_HEIGHT / 2 - p->ImgHeight;
 
     // 描画用座標計算
     p->pos.x = p->m_pos.x - camera.x + WINDOW_WIDTH / 2;

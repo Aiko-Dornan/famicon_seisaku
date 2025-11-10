@@ -8,10 +8,18 @@ public:
 	/*CBlock(Point, int, int);*/
 	//CPlayer(Point, int, int);
 	/*CEnemyBase();
-	//~CEnemyBase() {};*/
+	~CEnemyBase() {};*/
 
 	/*int Action(vector<unique_ptr<BaseVector>>&);
 	//void Draw();*/
+
+	//void Fire(vector<unique_ptr<BaseVector>>&);
+	virtual void Fire(vector<unique_ptr<BaseVector>>& base, Point targetPos);
+
+
+	void Die(vector<unique_ptr<BaseVector>>&);
+
+	void ItemDrop(vector<unique_ptr<BaseVector>>&,Point pos);
 
 	int radius{ 16 };
 
@@ -19,6 +27,9 @@ public:
 
 	bool item_drop{ false };
 	bool appear{ false };
+
+	int fire_cooldown{ 10 };
+	int refire_cooldown{ fire_cooldown };
 
 	enum EnemyID {
 		NORMALENEMY,
@@ -28,6 +39,8 @@ public:
 	};
 
 	int enemyid{ -1 };
+
+	
 
 };
 

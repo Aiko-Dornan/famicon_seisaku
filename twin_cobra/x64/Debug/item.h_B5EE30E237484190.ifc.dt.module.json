@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "x64\\Debug\\item.obj",
+            "outputs": [
+                "x64\\Debug\\item.h_B5EE30E237484190.ifc.dt.module.json",
+                "x64\\Debug\\item.h_B5EE30E237484190.ifc.dt.d.json",
+                "x64\\Debug\\item.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "C:\\Users\\GA2A\\Desktop\\famiconTC\\twin_cobra\\item.h",
+                    "source-path": "c:\\users\\ga2a\\desktop\\famicontc\\twin_cobra\\item.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}

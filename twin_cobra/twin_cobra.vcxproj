@@ -161,6 +161,7 @@
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="2D_function.h" />
     <ClInclude Include="enemybase.h" />
+    <ClInclude Include="enemybullet.h" />
     <ClInclude Include="function.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="library_function.h" />
@@ -185,6 +186,9 @@
     </ClCompile>
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="2D_function.cpp" />
+    <ClCompile Include="enemybase.cpp" />
+    <ClCompile Include="enemybullet.cpp" />
+    <ClCompile Include="item.cpp" />
     <ClCompile Include="testenemy.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="library_function.cpp" />
@@ -194,6 +198,7 @@
     </ClCompile>
     <ClCompile Include="player.cpp" />
     <ClCompile Include="playerbullet.cpp" />
+    <ClCompile Include="item.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

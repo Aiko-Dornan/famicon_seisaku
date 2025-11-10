@@ -73,6 +73,9 @@ int CPlayer::Action(vector<unique_ptr<BaseVector>>& base) {
 
 	}
 
+	
+
+
 	m_pos.x += vec.x;
 	m_pos.y += vec.y;
 	

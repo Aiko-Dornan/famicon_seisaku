@@ -22,6 +22,7 @@ CGame::CGame(CManager* p) :CScene(p){
 
 	base.emplace_back((unique_ptr<BaseVector>)new CTestEnemy());
 
+	
 }
 
 //XVˆ—
