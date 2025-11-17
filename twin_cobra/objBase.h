@@ -11,6 +11,8 @@ public:
 	int ID{ -1 };//オブジェクトID
 	bool FLAG{ true };//オブジェクト存在フラグ
 	bool draw_flag{ true };//オブジェクトの描画フラグ
+	
+
 
 	virtual int Action(list<unique_ptr<Base>>&) = 0;
 	virtual void Draw() = 0;
@@ -24,6 +26,7 @@ public:
 	int ID{ -1 };//オブジェクトID
 	bool FLAG{ true };//オブジェクト存在フラグ
 	bool draw_flag{ true };//オブジェクトの描画フラグ
+	int hp{ 10 };
 
 	virtual int Action(vector<unique_ptr<BaseVector>>&) = 0;
 	virtual void Draw() = 0;

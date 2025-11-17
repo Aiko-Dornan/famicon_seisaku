@@ -20,7 +20,12 @@ CGame::CGame(CManager* p) :CScene(p){
 
 	base.emplace_back((unique_ptr<BaseVector>)new CPlayer());
 
-	base.emplace_back((unique_ptr<BaseVector>)new CTestEnemy());
+	for (int i = 0; i < 10; i++)
+	{
+		base.emplace_back((unique_ptr<BaseVector>)new CTestEnemy());
+	}
+
+	
 
 	
 }

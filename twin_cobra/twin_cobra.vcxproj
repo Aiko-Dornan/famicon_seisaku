@@ -158,6 +158,7 @@
     <ClInclude Include="block.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="bomb.h" />
     <ClInclude Include="CCamera.h" />
     <ClInclude Include="2D_function.h" />
     <ClInclude Include="enemybase.h" />
@@ -184,11 +185,12 @@
     <ClCompile Include="block.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="bomb.cpp" />
     <ClCompile Include="CCamera.cpp" />
     <ClCompile Include="2D_function.cpp" />
     <ClCompile Include="enemybase.cpp" />
     <ClCompile Include="enemybullet.cpp" />
-    <ClCompile Include="item.cpp" />
+    <ClCompile Include="itembase.cpp" />
     <ClCompile Include="testenemy.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="library_function.cpp" />
@@ -198,7 +200,7 @@
     </ClCompile>
     <ClCompile Include="player.cpp" />
     <ClCompile Include="playerbullet.cpp" />
-    <ClCompile Include="item.h" />
+    <ClCompile Include="itembase.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "x64\\Debug\\itembase.h.obj",
+            "outputs": [
+                "C:\\Users\\GA2A\\Desktop\\famiconTC\\twin_cobra\\x64\\Debug\\vc143.pdb",
+                "x64\\Debug\\",
+                "C:\\Users\\GA2A\\Desktop\\famiconTC\\twin_cobra\\x64\\Debug\\itembase.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "itembase.h",
+                    "source-path": "c:\\users\\ga2a\\desktop\\famicontc\\twin_cobra\\itembase.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}

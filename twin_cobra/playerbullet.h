@@ -7,7 +7,8 @@ public:
 	//位置、チップナンバー、イメージハンドル
 	/*CBlock(Point, int, int);*/
 	//CPlayer(Point, int, int);
-	CPbullet(Point pos);
+	//CPbullet(Point pos);
+	CPbullet(float posx, float posy);
 	~CPbullet() {};
 
 	int Action(vector<unique_ptr<BaseVector>>&);
@@ -16,7 +17,7 @@ public:
 	int radius{ 4 };
 
 	bool appear{ false };
-
+	
 	
 };
 

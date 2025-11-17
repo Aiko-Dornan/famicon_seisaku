@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "x64\\Debug\\itembase.obj",
+            "outputs": [
+                "x64\\Debug\\itembase.h_9F110F6E202B0995.ifc.dt.module.json",
+                "x64\\Debug\\itembase.h_9F110F6E202B0995.ifc.dt.d.json",
+                "x64\\Debug\\itembase.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "C:\\Users\\GA2A\\Desktop\\famiconTC\\twin_cobra\\itembase.h",
+                    "source-path": "c:\\users\\ga2a\\desktop\\famicontc\\twin_cobra\\itembase.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}

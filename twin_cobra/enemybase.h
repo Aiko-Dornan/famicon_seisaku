@@ -23,7 +23,7 @@ public:
 
 	int radius{ 16 };
 
-	int hp{ 10 };
+	//int hp{ 10 };
 
 	bool item_drop{ false };
 	bool appear{ false };
@@ -40,7 +40,6 @@ public:
 
 	int enemyid{ -1 };
 
-	
 
 };
 

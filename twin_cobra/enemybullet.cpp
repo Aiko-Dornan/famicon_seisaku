@@ -48,8 +48,8 @@ int CEbullet::Action(vector<unique_ptr<BaseVector>>& base)
 			if (HitCheck_box((*i)->pos.x, (*i)->pos.y, pos.x, pos.y, p->ImgWidth, p->ImgHeight, radius, radius))
 			{
 				//‚±‚±‚Å“G‚ÌHP‚ðŒ¸‚ç‚·
-				CPlayer* player = (CPlayer*)Get_obj(base, PLAYER);
-				player->hp -= 1;  // © HP‚ðŒ¸‚ç‚·I
+				//CPlayer* player = (CPlayer*)Get_obj(base, PLAYER);
+				(*i)->hp -= 1;  // © HP‚ðŒ¸‚ç‚·I
 				FLAG = false;    // ’e‚ðÁ‚·
 				break;           // 1‘Ì‚É“–‚½‚Á‚½‚çI—¹
 				/*if (HitCheck_box(enemy->pos.x, enemy->pos.y, pos.x, pos.y, enemy->radius, radius))

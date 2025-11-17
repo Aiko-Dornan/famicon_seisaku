@@ -1,7 +1,7 @@
 #include"enemybase.h"
 #include"function.h"
 #include"enemybullet.h"
-#include"item.h"
+#include"itembase.h"
 
 //CEnemyBase::CEnemyBase()
 //{
@@ -19,8 +19,8 @@ void CEnemyBase::Fire(std::vector<std::unique_ptr<BaseVector>>& base, Point targ
 {
     // 敵→プレイヤー方向ベクトル
     Point dir;
-    dir.x = targetPos.x - pos.x;
-    dir.y = targetPos.y - pos.y;
+    dir.x = (targetPos.x+15) - pos.x;
+    dir.y = (targetPos.y+20) - pos.y;
 
     // 正規化
     float len = sqrtf(dir.x * dir.x + dir.y * dir.y);
@@ -52,7 +52,8 @@ void CEnemyBase::Die(vector<unique_ptr<BaseVector>>& base)
 
 void CEnemyBase::ItemDrop(vector<unique_ptr<BaseVector>>& base,Point pos)
 {
-    base.emplace_back((unique_ptr<BaseVector>)new CItem(pos));
-
+    base.emplace_back((unique_ptr<BaseVector>)new CItemBase(pos));
+    
+    
 
 }

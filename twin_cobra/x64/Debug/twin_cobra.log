@@ -1,5 +1,4 @@
 ﻿  モジュール依存関係のソースをスキャンしています...
-  testenemy.cpp
-C:\Users\GA2A\Desktop\famiconTC\twin_cobra\testenemy.cpp(76,23): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\GA2A\Desktop\famiconTC\twin_cobra\testenemy.cpp(76,16): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+  game.cpp
+C:\Users\GA2A\Desktop\famiconTC\twin_cobra\game.cpp(44,37): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
   twin_cobra.vcxproj -> C:\Users\GA2A\Desktop\famiconTC\x64\Debug\twin_cobra.exe

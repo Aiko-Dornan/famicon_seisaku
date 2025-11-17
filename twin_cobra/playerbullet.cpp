@@ -3,11 +3,16 @@
 #include"player.h"
 #include"enemybase.h"
 
-CPbullet::CPbullet(Point pos)
+CPbullet::CPbullet(float posx,float posy)
 {
-	this->pos = pos;
+	CPlayer cp;
+
+	this->pos.x = posx;
+	this->pos.y = posy;
 
 	this->pos.x = pos.x + 15.0f;
+
+	
 
 	vec.y -= 8.0f;
 
@@ -40,8 +45,8 @@ int CPbullet::Action(vector<unique_ptr<BaseVector>>&base)
 			if (HitCheck_box((*i)->pos.x,(*i)->pos.y,pos.x,pos.y, eb->ImgWidth, eb->ImgHeight,radius,radius))
 			{
 				//‚±‚±‚Å“G‚ÌHP‚ðŒ¸‚ç‚·
-				CEnemyBase* enemy = (CEnemyBase*)Get_obj(base, ENEMY);
-				enemy->hp -= 1;  // © HP‚ðŒ¸‚ç‚·I
+				//CEnemyBase* enemy = (CEnemyBase*)Get_obj(base, ENEMY);
+				(*i)->hp -= 1;  // © HP‚ðŒ¸‚ç‚·I
 				FLAG = false;    // ’e‚ðÁ‚·
 				break;           // 1‘Ì‚É“–‚½‚Á‚½‚çI—¹
 				/*if (HitCheck_box(enemy->pos.x, enemy->pos.y, pos.x, pos.y, enemy->radius, radius))

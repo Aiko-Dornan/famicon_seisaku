@@ -89,6 +89,9 @@
     <ClInclude Include="enemybullet.h">
       <Filter>ヘッダー ファイル\オブジェクト</Filter>
     </ClInclude>
+    <ClInclude Include="bomb.h">
+      <Filter>ヘッダー ファイル\オブジェクト</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -133,11 +136,14 @@
     <ClCompile Include="enemybase.cpp">
       <Filter>ソース ファイル\オブジェクト</Filter>
     </ClCompile>
-    <ClCompile Include="item.cpp">
+    <ClCompile Include="itembase.cpp">
       <Filter>ソース ファイル\オブジェクト</Filter>
     </ClCompile>
-    <ClCompile Include="item.h">
+    <ClCompile Include="itembase.h">
       <Filter>ヘッダー ファイル\オブジェクト</Filter>
+    </ClCompile>
+    <ClCompile Include="bomb.cpp">
+      <Filter>ソース ファイル\オブジェクト</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,5 +1,6 @@
 #include"player.h"
 #include"playerbullet.h"
+#include"bomb.h"
 
 CPlayer::CPlayer()
 {
@@ -16,7 +17,7 @@ CPlayer::CPlayer()
 	//pos.x = WINDOW_WIDTH/2;
 	//pos.y = 6000;
 
-	
+	hp = 3;
 
 	m_pos.x = WINDOW_WIDTH / 2;
 	m_pos.y = 6150;
@@ -55,10 +56,24 @@ int CPlayer::Action(vector<unique_ptr<BaseVector>>& base) {
 	{
 		vec.x += 3.0f;
 	}
+	if (CheckHitKey(KEY_INPUT_F)&&bomb_num>0&&bomb_interval<0&&bomb_flag)
+	{
+		base.emplace_back((unique_ptr<BaseVector>)new CBomb(pos));
+		bomb_num--;
+		bomb_interval = 20;
+		bomb_flag = false;
+	}
+	else if (!CheckHitKey(KEY_INPUT_F))
+	{
+		
+		bomb_flag = true;
+	}
+	bomb_interval--;
+
 	if (CheckHitKey(KEY_INPUT_SPACE)&&fire_cooldown<0)
 	{
-		base.emplace_back((unique_ptr<BaseVector>)new CPbullet(pos));
-		fire_cooldown = 10;
+		//base.emplace_back((unique_ptr<BaseVector>)new CPbullet(pos.x,pos.y));
+		Fire(base);
 	}
 	fire_cooldown--;
 
@@ -95,6 +110,59 @@ void CPlayer::Draw()
 		img, true
 	);
 
+	DrawFormatString(pos.x - 50, pos.y + 30, GetColor(255, 255, 255), "bull:%d,bomb:%d", bullet_num, bomb_num);
+
+}
+
+void CPlayer::Fire(vector<unique_ptr<BaseVector>>&base)
+{
+	for (int i = 1; i <= bullet_num; i++)
+	{
+		if (bullet_num == 1)
+		{
+			base.emplace_back((unique_ptr<BaseVector>)new CPbullet(pos.x, pos.y));
+		}
+		else
+		{
+			if (bullet_num % 2 == 0)
+			{
+				if (i % 2 == 0)
+				{
+					base.emplace_back((unique_ptr<BaseVector>)new CPbullet(pos.x + 7 * (i - 1), pos.y));
+				}
+				else
+				{
+					base.emplace_back((unique_ptr<BaseVector>)new CPbullet(pos.x - 7 * i, pos.y));
+				}
+			}
+			else
+			{
+				if (i == 1)
+				{
+					base.emplace_back((unique_ptr<BaseVector>)new CPbullet(pos.x, pos.y));
+				}
+				else
+				{
+					if (i % 2 == 0)
+					{
+						base.emplace_back((unique_ptr<BaseVector>)new CPbullet(pos.x + 7 * (i), pos.y));
+					}
+					else
+					{
+						base.emplace_back((unique_ptr<BaseVector>)new CPbullet(pos.x - 7 * (i - 1), pos.y));
+					}
+				}
 
 
+
+			}
+
+
+		}
+
+
+
+	}
+
+	fire_cooldown = 10;
 }
