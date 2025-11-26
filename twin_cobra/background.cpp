@@ -15,6 +15,8 @@ CBackGround::CBackGround()
     camera.x = WINDOW_WIDTH / 2;
     camera.y = ImgHeight - WINDOW_HEIGHT / 2; // Å‰‚Íˆê”Ô‰º‚©‚çŠJn
 
+    ID = BACKGROUND;
+
     tipNo = 1;
 }
 

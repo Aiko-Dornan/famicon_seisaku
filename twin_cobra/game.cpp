@@ -6,6 +6,46 @@
 #include"player.h"
 #include"background.h"
 #include"testenemy.h"
+#include <fstream>
+#include <sstream>
+
+
+
+bool LoadEnemyCSV(const char* filename, vector<EnemySpawnData>& outList)
+{
+	std::ifstream file(filename);
+	if (!file) return false;
+
+	std::string line;
+
+	while (std::getline(file, line))
+	{
+		// コメント行は無視
+		if (line.empty() || line[0] == '#')
+			continue;
+
+		std::stringstream ss(line);
+		std::string item;
+
+		EnemySpawnData data;
+
+		std::getline(ss, item, ',');
+		data.type = std::stoi(item);
+
+		std::getline(ss, item, ',');
+		data.x = std::stof(item);
+
+		std::getline(ss, item, ',');
+		data.spawnY = std::stof(item);
+
+		data.spawned = false;
+
+		outList.push_back(data);
+	}
+
+	return true;
+}
+
 
 //コンストラクタ
 CGame::CGame(CManager* p) :CScene(p){
@@ -15,23 +55,51 @@ CGame::CGame(CManager* p) :CScene(p){
 	//map = new CMap();//マップマネージャー生成
 	//map->LoadMap();//マップデータの読み込み
 	//map->Map_Obj_Creation(base);//マップチップオブジェクト生成
-
+	
 	base.emplace_back((unique_ptr<BaseVector>)new CBackGround());
 
 	base.emplace_back((unique_ptr<BaseVector>)new CPlayer());
 
-	for (int i = 0; i < 10; i++)
+	/*for (int i = 0; i < 10; i++)
 	{
 		base.emplace_back((unique_ptr<BaseVector>)new CTestEnemy());
-	}
+	}*/
 
-	
+	// CSV を読み込む
+	LoadEnemyCSV("LoadEnemy\\LoadEnemy.csv", SpawnList);
 
 	
 }
 
 //更新処理
 int CGame::Update(){
+
+	CPlayer* p = (CPlayer*)Get_obj(base, PLAYER);
+	CBackGround* bg = (CBackGround*)Get_obj(base, BACKGROUND);
+	float cameraY = bg->camera.y;
+
+	// ===== 敵スポーン処理 =====
+	for (auto& s : SpawnList)
+	{
+		if (!s.spawned && p->pos.y<= s.spawnY)
+		{
+			// 敵を種類に応じて生成
+			switch (s.type)
+			{
+			case 0:
+				base.emplace_back((unique_ptr<BaseVector>)new CTestEnemy(s.x, s.spawnY));
+				break;
+
+			/*case 1:
+				base.emplace_back(std::make_unique<CBossEnemy>(s.x, s.spawnY));
+				break;*/
+			}
+
+			s.spawned = true;
+		}
+	}
+
+
 	//更新処理
 	for (int i = 0; i < base.size(); i++)
 		base[i]->Action(base);
@@ -85,3 +153,4 @@ CGame::~CGame()
 {
 
 }
+

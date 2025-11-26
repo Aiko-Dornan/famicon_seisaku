@@ -8,7 +8,7 @@ public:
 	/*CBlock(Point, int, int);*/
 	//CPlayer(Point, int, int);
 	//CPbullet(Point pos);
-	CPbullet(float posx, float posy);
+	CPbullet(float posx, float posy,float ang);
 	~CPbullet() {};
 
 	int Action(vector<unique_ptr<BaseVector>>&);
@@ -16,8 +16,9 @@ public:
 
 	int radius{ 4 };
 
-	bool appear{ false };
+	int testid{ 0 };
 	
-	
+	float angle;   // 弾の飛ぶ角度（ラジアン）
+	float speed;   // 速度
 };
 

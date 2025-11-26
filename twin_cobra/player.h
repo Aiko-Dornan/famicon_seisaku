@@ -25,5 +25,9 @@ public:
 	int bomb_interval{ 20 };
 	bool bomb_flag{ true };
 
+	int bullet_id{ 0 };
+
+	float rad{ 0.0f };
+
 	int tipNo{ -1 };
 };

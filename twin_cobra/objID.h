@@ -7,5 +7,5 @@ enum objID {
 	ITEM,
 	ENEMY,
 	EBULLET,
-
+	BACKGROUND,
 };

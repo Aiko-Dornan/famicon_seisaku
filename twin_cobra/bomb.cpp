@@ -59,6 +59,17 @@ void CBomb::Explosion(vector<unique_ptr<BaseVector>>& base)
 					(*i)->hp -= 10;  // © HP‚ğŒ¸‚ç‚·I
 				}
 			}
+
+			if ((*i)->ID == EBULLET)
+			{
+				if (HitCheck_box((*i)->pos.x, (*i)->pos.y, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT))
+				{
+					//‚±‚±‚Å“G‚ÌHP‚ğŒ¸‚ç‚·
+					//CEnemyBase* enemy = (CEnemyBase*)Get_obj(base, ENEMY);
+					(*i)->FLAG=false;  // © HP‚ğŒ¸‚ç‚·I
+				}
+			}
+
 		}
 		FLAG = false;    // ”š’e‚ğÁ‚·
 	}

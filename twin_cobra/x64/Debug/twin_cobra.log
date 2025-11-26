@@ -1,4 +1,4 @@
 ﻿  モジュール依存関係のソースをスキャンしています...
   game.cpp
-C:\Users\GA2A\Desktop\famiconTC\twin_cobra\game.cpp(44,37): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
-  twin_cobra.vcxproj -> C:\Users\GA2A\Desktop\famiconTC\x64\Debug\twin_cobra.exe
+C:\Users\GA2A\Desktop\vs_famicon\twin_cobra\game.cpp(112,37): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+  twin_cobra.vcxproj -> C:\Users\GA2A\Desktop\vs_famicon\x64\Debug\twin_cobra.exe

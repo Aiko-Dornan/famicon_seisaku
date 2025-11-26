@@ -2,8 +2,9 @@
 #include"function.h"
 #include"player.h"
 #include"enemybullet.h"
+#include"background.h"
 
-CTestEnemy::CTestEnemy(/*Point pos*/)
+CTestEnemy::CTestEnemy(float fx,float fy)
 {
 
 	ImgWidth = radius*2;
@@ -25,21 +26,24 @@ CTestEnemy::CTestEnemy(/*Point pos*/)
 
 	pri = 10;
 
-	pos.x = WINDOW_WIDTH / 2;
+	pos.x = fx;
+	pos.y = fy;
+
+	appear = true;
 }
 
 int CTestEnemy::Action(vector<unique_ptr<BaseVector>>& base)
 {
 	CPlayer* p = (CPlayer*)Get_obj(base, PLAYER);
 
-	if (!appear)
-	{
+	//if (!appear)
+	//{
 
 
-		pos.y = p->pos.y-300;
+	//	pos.y = p->pos.y-300;
 
-		//appear = true;
-	}
+	//	//appear = true;
+	//}
 
 	if (pos.x<0+radius/2||pos.x>WINDOW_WIDTH-radius/2)
 	{
@@ -48,7 +52,7 @@ int CTestEnemy::Action(vector<unique_ptr<BaseVector>>& base)
 	pos.x += vec.x;
 
 
-	if (hp<0||pos.y>p->pos.y+WINDOW_HEIGHT)
+	if (hp<0/*||pos.y>p->pos.y+WINDOW_HEIGHT*/)
 	{
 		Die(base);
 
@@ -75,5 +79,13 @@ void CTestEnemy::Draw()
 {
 	DrawCircle(pos.x, pos.y, radius, GetColor(255, 255, 255), true);
 
+	//// base ‚©‚ç”wŒiŽæ“¾
+	//extern vector<unique_ptr<BaseVector>> base; // ‚à‚µƒOƒ[ƒoƒ‹‚ÅŽ‚Á‚Ä‚¢‚é‚È‚ç
+	//CBackGround* bg = (CBackGround*)Get_obj(base, BACKGROUND);
+	//if (!bg) return;
 
+	//float drawX = pos.x - bg->camera.x + WINDOW_WIDTH / 2;
+	//float drawY = pos.y - bg->camera.y + WINDOW_HEIGHT / 2;
+
+	//DrawCircle(drawX, drawY, radius, GetColor(255, 255, 255), true);
 }

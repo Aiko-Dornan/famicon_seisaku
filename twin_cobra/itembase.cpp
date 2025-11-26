@@ -2,6 +2,7 @@
 #include"function.h"
 #include"enemybase.h"
 #include"player.h"
+#include"playerbullet.h"
 
 CItemBase::CItemBase(Point pos)
 {
@@ -19,18 +20,18 @@ CItemBase::CItemBase(Point pos)
 	{
 	case CItemBase::Upgrade:
 		
-		item_color = 255;
+		item_color_r = 255;
 		break;
 	case CItemBase::Change:
 		
-		item_color = 150;
+		item_color_r = 255;
 		break;
 	case CItemBase::Bomb:
 		
-		item_color = 50;
+		item_color_r = 50;
 		break;
 	default:
-		item_color = 0;
+		item_color_r = 0;
 		break;
 	
 	}
@@ -52,6 +53,57 @@ int CItemBase::Action(vector<unique_ptr<BaseVector>>& base)
 
 		appear = true;
 	}*/
+
+	if (color_change_time>0)
+	{
+		color_change_time--;
+	}
+	else
+	{
+		color_change_time = 50;
+
+		if (color_type<3)
+		{
+			color_type++;
+		}
+		else
+		{
+			color_type = 0;
+		}
+
+	}
+
+	if (itemid==Change)
+	{
+		switch (color_type)
+		{
+		case 0:
+			item_color_r = 255;
+			item_color_g = 0;
+			item_color_b = 0;
+			break;
+		case 1:
+			item_color_r = 0;
+			item_color_g = 255;
+			item_color_b = 0;
+			break;
+		case 2:
+			item_color_r = 0;
+			item_color_g = 0;
+			item_color_b = 0;
+			break;
+		case 3:
+			item_color_r = 255;
+			item_color_g = 255;
+			item_color_b = 0;
+			break;
+
+		default:
+			break;
+		}
+
+
+	}
 
 	CPlayer* p = (CPlayer*)Get_obj(base, PLAYER);
 	if (pos.y < p->pos.y - WINDOW_HEIGHT)
@@ -89,7 +141,7 @@ int CItemBase::Action(vector<unique_ptr<BaseVector>>& base)
 
 void CItemBase::Draw()
 {
-	DrawCircle(pos.x, pos.y, radius, GetColor(item_color, 0, 0), true);
+	DrawCircle(pos.x, pos.y, radius, GetColor(item_color_r, item_color_g, item_color_b), true);
 
 	
 }
@@ -97,17 +149,29 @@ void CItemBase::Draw()
 void CItemBase::ItemGet(vector<unique_ptr<BaseVector>>&base)
 {
 	CPlayer* p = (CPlayer*)Get_obj(base, PLAYER);
+	
 
 	switch (itemid)
 	{
 	case CItemBase::Upgrade:
-		if (p->bullet_num<6)
+		if (p->bullet_num<10)
 		{
 			p->bullet_num++;
 		}
 		break;
 	case CItemBase::Change:
-		p->bullet_num = 1;
+		if (p->bullet_id==color_type)
+		{
+			if (p->bullet_num < 10)
+			{
+				p->bullet_num++;
+			}
+		}
+		else
+		{
+			p->bullet_num = 1;
+			p->bullet_id = color_type;
+		}
 		
 		break;
 	case CItemBase::Bomb:

@@ -4,6 +4,15 @@
 #include "CCamera.h"
 #include"map.h"
 
+struct EnemySpawnData
+{
+	int type;         // 敵の種類
+	float x;          // 出現X座標
+	float spawnY;     // このYに到達したら spawn
+	bool spawned;     // すでに出したか？
+};
+
+bool LoadEnemyCSV(const char* filename, std::vector<EnemySpawnData>& outList);
 
 class CGame :public CScene
 {
@@ -25,8 +34,12 @@ public:
 	int Update();//更新処理
 	void Draw();//描画処理
 
+	
+
 	//マップマネージャー
 	CMap* map;
+
+	vector<EnemySpawnData> SpawnList;
 
 	//CCamera* camera;//カメラオブジェクト
 };

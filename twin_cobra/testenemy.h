@@ -7,7 +7,7 @@ public:
 	//位置、チップナンバー、イメージハンドル
 	/*CBlock(Point, int, int);*/
 	//CPlayer(Point, int, int);
-	CTestEnemy(/*Point pos*/);
+	CTestEnemy(float x,float y);
 	~CTestEnemy() {};
 
 	int Action(vector<unique_ptr<BaseVector>>&);

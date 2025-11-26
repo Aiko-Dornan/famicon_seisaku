@@ -30,6 +30,12 @@ public:
 
 	int itemid{ -1 };
 
-	int item_color{ 0 };
+	int item_color_r{ 0 };
+	int item_color_g{ 0 };
+	int item_color_b{ 0 };
+
+	int color_change_time{ 50 };
+	int color_type{ 0 };
+
 
 };
