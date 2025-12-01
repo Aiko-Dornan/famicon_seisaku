@@ -6,6 +6,7 @@
 #include"player.h"
 #include"background.h"
 #include"testenemy.h"
+#include"enemy_heli.h"
 #include <fstream>
 #include <sstream>
 
@@ -62,7 +63,7 @@ CGame::CGame(CManager* p) :CScene(p){
 
 	/*for (int i = 0; i < 10; i++)
 	{
-		base.emplace_back((unique_ptr<BaseVector>)new CTestEnemy());
+		base.emplace_back((unique_ptr<BaseVector>)new CTestEnemy(pos.x,pos.y));
 	}*/
 
 	// CSV Çì«Ç›çûÇﬁ
@@ -77,28 +78,51 @@ int CGame::Update(){
 	CPlayer* p = (CPlayer*)Get_obj(base, PLAYER);
 	CBackGround* bg = (CBackGround*)Get_obj(base, BACKGROUND);
 	float cameraY = bg->camera.y;
-
+	static float prevPlayerY = p->m_pos.y;
 	// ===== ìGÉXÉ|Å[Éìèàóù =====
+	//for (auto& s : SpawnList)
+	//{
+	//	if (!s.spawned && p->m_pos.y <= s.spawnY)
+	//	{
+	//		// ìGÇéÌóﬁÇ…âûÇ∂Çƒê∂ê¨
+	//		switch (s.type)
+	//		{
+	//		case 0:
+	//			base.emplace_back((unique_ptr<BaseVector>)new CTestEnemy(s.x, s.spawnY));
+	//			break;
+
+	//		/*case 1:
+	//			base.emplace_back(std::make_unique<CBossEnemy>(s.x, s.spawnY));
+	//			break;*/
+	//		}
+
+	//		s.spawned = true;
+	//	}
+	//}
+
 	for (auto& s : SpawnList)
 	{
-		if (!s.spawned && p->pos.y<= s.spawnY)
+		if (!s.spawned &&
+			prevPlayerY > s.spawnY &&
+			p->m_pos.y <= s.spawnY+600)
 		{
 			// ìGÇéÌóﬁÇ…âûÇ∂Çƒê∂ê¨
 			switch (s.type)
 			{
 			case 0:
-				base.emplace_back((unique_ptr<BaseVector>)new CTestEnemy(s.x, s.spawnY));
+				base.emplace_back((unique_ptr<BaseVector>)new CHeliEnemy(s.x, s.spawnY));
 				break;
 
-			/*case 1:
-				base.emplace_back(std::make_unique<CBossEnemy>(s.x, s.spawnY));
-				break;*/
+			case 1:
+				base.emplace_back(std::make_unique<CTestEnemy>(s.x, s.spawnY));
+				break;
 			}
-
+			
 			s.spawned = true;
 		}
 	}
 
+	prevPlayerY = p->m_pos.y;
 
 	//çXêVèàóù
 	for (int i = 0; i < base.size(); i++)

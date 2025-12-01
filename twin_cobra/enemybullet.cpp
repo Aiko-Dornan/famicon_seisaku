@@ -2,6 +2,7 @@
 #include"function.h"
 #include"player.h"
 #include"enemybase.h"
+#include"background.h"
 
 CEbullet::CEbullet(Point startPos, Point dir)
 {
@@ -26,14 +27,15 @@ int CEbullet::Action(vector<unique_ptr<BaseVector>>& base)
 {
 	CPlayer* p = (CPlayer*)Get_obj(base, PLAYER);
 
-	
+	drawX = pos.x - g_BackGround->camera.x + WINDOW_WIDTH / 2;
+	drawY = pos.y - g_BackGround->camera.y + WINDOW_HEIGHT / 2;
 
 
 	pos.x += vec.x * speed;
 	pos.y += vec.y * speed;
 
 	// âÊñ äOÇ≈çÌèú
-	if (pos.x < 0 || pos.x > WINDOW_WIDTH || pos.y < 0 || pos.y > WINDOW_HEIGHT)
+	if (drawX < 0 || drawX > WINDOW_WIDTH || drawY < 0 || drawY > WINDOW_HEIGHT)
 		FLAG = false;
 
 	CEnemyBase* eb = (CEnemyBase*)Get_obj(base, ENEMY);
@@ -45,7 +47,7 @@ int CEbullet::Action(vector<unique_ptr<BaseVector>>& base)
 	{
 		if ((*i)->ID == PLAYER)
 		{
-			if (HitCheck_box((*i)->pos.x, (*i)->pos.y, pos.x, pos.y, p->ImgWidth, p->ImgHeight, radius, radius))
+			if (HitCheck_box((*i)->pos.x, (*i)->pos.y, drawX, drawY, p->ImgWidth, p->ImgHeight, radius, radius))
 			{
 				//Ç±Ç±Ç≈ìGÇÃHPÇå∏ÇÁÇ∑
 				//CPlayer* player = (CPlayer*)Get_obj(base, PLAYER);
@@ -72,7 +74,7 @@ int CEbullet::Action(vector<unique_ptr<BaseVector>>& base)
 
 void CEbullet::Draw()
 {
-	DrawCircle(pos.x, pos.y, radius, GetColor(255, 255, 255), true);
+	DrawCircle(drawX, drawY, radius, GetColor(255, 255, 255), true);
 
 
 }

@@ -1,6 +1,8 @@
 #pragma once
 #include"objBase.h"
 
+
+
 class CBackGround :public BaseVector
 {
 public:
@@ -17,4 +19,8 @@ public:
 
 	int tipNo{ -1 };
 
+	
+
 };
+
+extern CBackGround* g_BackGround;

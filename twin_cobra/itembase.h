@@ -28,6 +28,9 @@ public:
 
 	};
 
+	float drawX{ 0.0f };
+	float drawY{ 0.0f };
+
 	int itemid{ -1 };
 
 	int item_color_r{ 0 };

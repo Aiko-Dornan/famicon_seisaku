@@ -4,8 +4,12 @@
 #include"function.h"
 #include"playerbullet.h"
 
+CBackGround* g_BackGround = nullptr;
+
 CBackGround::CBackGround()
 {
+    g_BackGround = this; // 自分を登録
+
     img = LoadGraph("LoadMap\\NES - Twin Cobra - Maps - Stage 01.png");
 
     // マップサイズ
@@ -16,7 +20,7 @@ CBackGround::CBackGround()
     camera.y = ImgHeight - WINDOW_HEIGHT / 2; // 最初は一番下から開始
 
     ID = BACKGROUND;
-
+   
     tipNo = 1;
 }
 

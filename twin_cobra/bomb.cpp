@@ -2,6 +2,7 @@
 #include"function.h"
 #include"player.h"
 #include"enemybase.h"
+#include"background.h"
 
 CBomb::CBomb(Point pos)
 {
@@ -50,9 +51,12 @@ void CBomb::Explosion(vector<unique_ptr<BaseVector>>& base)
 	{
 		for (auto i = base.begin(); i != base.end(); i++)
 		{
+			float drawX = (*i)->pos.x - g_BackGround->camera.x + WINDOW_WIDTH / 2;
+			float drawY = (*i)->pos.y - g_BackGround->camera.y + WINDOW_HEIGHT / 2;
+
 			if ((*i)->ID == ENEMY)
 			{
-				if (HitCheck_box((*i)->pos.x, (*i)->pos.y, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT))
+				if (HitCheck_box(drawX, drawY, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT))
 				{
 					//‚±‚±‚Å“G‚ÌHP‚ðŒ¸‚ç‚·
 					//CEnemyBase* enemy = (CEnemyBase*)Get_obj(base, ENEMY);
@@ -62,7 +66,7 @@ void CBomb::Explosion(vector<unique_ptr<BaseVector>>& base)
 
 			if ((*i)->ID == EBULLET)
 			{
-				if (HitCheck_box((*i)->pos.x, (*i)->pos.y, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT))
+				if (HitCheck_box(drawX, drawY, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT))
 				{
 					//‚±‚±‚Å“G‚ÌHP‚ðŒ¸‚ç‚·
 					//CEnemyBase* enemy = (CEnemyBase*)Get_obj(base, ENEMY);

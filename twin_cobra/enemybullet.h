@@ -13,6 +13,9 @@ public:
 	int Action(vector<unique_ptr<BaseVector>>&);
 	void Draw();
 
+	float drawX{ 0.0f };
+	float drawY{ 0.0f };
+
 	int radius{ 4 };
 
 	bool appear{ false };

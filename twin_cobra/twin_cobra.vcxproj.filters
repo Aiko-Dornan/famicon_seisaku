@@ -27,6 +27,12 @@
     <Filter Include="ライブラリ用ソースファイル">
       <UniqueIdentifier>{e93d6900-d129-4c3f-acbd-1f8be7236993}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\オブジェクト\enemy">
+      <UniqueIdentifier>{3caade0b-93cb-4011-9093-3c11bc7ef0a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\オブジェクト\enemy">
+      <UniqueIdentifier>{b4f38581-66e7-4422-b7af-b91de5e73189}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -92,6 +98,9 @@
     <ClInclude Include="bomb.h">
       <Filter>ヘッダー ファイル\オブジェクト</Filter>
     </ClInclude>
+    <ClInclude Include="enemy_heli.h">
+      <Filter>ヘッダー ファイル\オブジェクト\enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -144,6 +153,9 @@
     </ClCompile>
     <ClCompile Include="bomb.cpp">
       <Filter>ソース ファイル\オブジェクト</Filter>
+    </ClCompile>
+    <ClCompile Include="enemy_heli.cpp">
+      <Filter>ソース ファイル\オブジェクト\enemy</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

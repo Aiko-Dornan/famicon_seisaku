@@ -3,6 +3,7 @@
 #include"enemybase.h"
 #include"player.h"
 #include"playerbullet.h"
+#include"background.h"
 
 CItemBase::CItemBase(Point pos)
 {
@@ -24,7 +25,8 @@ CItemBase::CItemBase(Point pos)
 		break;
 	case CItemBase::Change:
 		
-		item_color_r = 255;
+		//item_color_r = 255;
+		color_type = GetRand(3);
 		break;
 	case CItemBase::Bomb:
 		
@@ -41,6 +43,9 @@ CItemBase::CItemBase(Point pos)
 
 int CItemBase::Action(vector<unique_ptr<BaseVector>>& base)
 {
+	drawX = pos.x - g_BackGround->camera.x + WINDOW_WIDTH / 2;
+	drawY = pos.y - g_BackGround->camera.y + WINDOW_HEIGHT / 2;
+
 	/*CEnemyBase* eb = (CEnemyBase*)Get_obj(base, ENEMY);
 
 	if (!appear)
@@ -115,7 +120,7 @@ int CItemBase::Action(vector<unique_ptr<BaseVector>>& base)
 	{
 		if ((*i)->ID == PLAYER)
 		{
-			if (HitCheck_box((*i)->pos.x, (*i)->pos.y, pos.x, pos.y, p->ImgWidth, p->ImgHeight, radius, radius))
+			if (HitCheck_box((*i)->pos.x, (*i)->pos.y, drawX, drawY, p->ImgWidth, p->ImgHeight, radius, radius))
 			{
 
 
@@ -141,7 +146,7 @@ int CItemBase::Action(vector<unique_ptr<BaseVector>>& base)
 
 void CItemBase::Draw()
 {
-	DrawCircle(pos.x, pos.y, radius, GetColor(item_color_r, item_color_g, item_color_b), true);
+	DrawCircle(drawX, drawY, radius, GetColor(item_color_r, item_color_g, item_color_b), true);
 
 	
 }
@@ -169,6 +174,15 @@ void CItemBase::ItemGet(vector<unique_ptr<BaseVector>>&base)
 		}
 		else
 		{
+			for (auto i = base.begin(); i != base.end(); i++)
+			{
+				if ((*i)->ID==PBULLET)
+				{
+					(*i)->FLAG = false;
+				}
+
+			}
+
 			p->bullet_num = 1;
 			p->bullet_id = color_type;
 		}

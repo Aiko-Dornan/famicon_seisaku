@@ -111,7 +111,7 @@ void CPlayer::Draw()
 	);
 
 	DrawFormatString(pos.x - 50, pos.y + 30, GetColor(255, 255, 255), "bull:%d,bomb:%d", bullet_num, bomb_num);
-
+	DrawFormatString(pos.x-50, pos.y+50, GetColor(255, 255, 255), "%f,%f", pos.x, pos.y);
 }
 
 void CPlayer::Fire(vector<unique_ptr<BaseVector>>&base)

@@ -20,10 +20,10 @@ CTestEnemy::CTestEnemy(float fx,float fy)
 	refire_cooldown = fire_cooldown;
 
 	radius = 16;
-	item_drop = true;
+	item_drop = false;
 
-	enemyid = NORMALENEMY;
-
+	//enemyid = NORMALENEMY;
+	enemyid = BONUSENEMY;
 	pri = 10;
 
 	pos.x = fx;
@@ -35,6 +35,11 @@ CTestEnemy::CTestEnemy(float fx,float fy)
 int CTestEnemy::Action(vector<unique_ptr<BaseVector>>& base)
 {
 	CPlayer* p = (CPlayer*)Get_obj(base, PLAYER);
+
+	 drawX = pos.x - g_BackGround->camera.x + WINDOW_WIDTH / 2;
+	 drawY = pos.y - g_BackGround->camera.y + WINDOW_HEIGHT / 2;
+
+
 
 	//if (!appear)
 	//{
@@ -64,7 +69,7 @@ int CTestEnemy::Action(vector<unique_ptr<BaseVector>>& base)
 		//base.emplace_back((unique_ptr<BaseVector>)new CEbullet(pos));
 
 		//Fire(base);
-		if (p) Fire(base, p->pos);  // ← プレイヤー座標を渡す
+		if (p) Fire(base, p->m_pos);  // ← プレイヤー座標を渡す
 		
 	}
 	else
@@ -77,7 +82,16 @@ int CTestEnemy::Action(vector<unique_ptr<BaseVector>>& base)
 
 void CTestEnemy::Draw()
 {
-	DrawCircle(pos.x, pos.y, radius, GetColor(255, 255, 255), true);
+	//DrawCircle(pos.x, pos.y, radius, GetColor(255, 255, 255), true);
+
+
+	if (!g_BackGround) return;
+
+	
+
+	DrawFormatString(drawX, drawY, GetColor(255, 255, 255), "%f,%f", pos.x, pos.y);
+
+	DrawCircle(drawX, drawY, radius, GetColor(255, 255, 255), true);
 
 	//// base から背景取得
 	//extern vector<unique_ptr<BaseVector>> base; // もしグローバルで持っているなら
