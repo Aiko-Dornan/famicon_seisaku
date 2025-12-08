@@ -6,10 +6,10 @@ CPlayer::CPlayer()
 {
 	//img = _img;
 
-	img = LoadGraph("img\\player.png");
+	img = LoadGraph("img\\player2.png");
 
 	//チップサイズ
-	ImgWidth = 30;
+	ImgWidth = 38;
 	ImgHeight = 40;
 
 	//pos = _p;//描画位置
@@ -27,19 +27,24 @@ CPlayer::CPlayer()
 	//切り取り位置
 	//16はマップチップ画像の横個数
 
-	CutX = (/*_No*/ 7% 6) * ImgWidth;
-	CutY = (/*_No*/ 7/ 5) * ImgHeight;
+	
 
-	pri = 10;
+	CutX =/* (_No 7 % 6)*/anime_flame * ImgWidth;
+	CutY = anime_flame_t*ImgHeight;
+
+	pri = 15;
 
 	ID = PLAYER;
 
+	player_state = STATE_IDLE;
 	//tipNo = _No;
 
 }
 
 int CPlayer::Action(vector<unique_ptr<BaseVector>>& base) { 
 	
+	CutX =anime_flame * ImgWidth;
+	CutY = anime_flame_t * ImgHeight;
 	if (CheckHitKey(KEY_INPUT_W))
 	{
 		vec.y -= 3.0f;
@@ -77,6 +82,11 @@ int CPlayer::Action(vector<unique_ptr<BaseVector>>& base) {
 	}
 	fire_cooldown--;
 
+	if (hp<0)
+	{
+		
+		player_state = STATE_DIE;
+	}
 
 	if (m_pos.x>=WINDOW_WIDTH-ImgWidth)
 	{
@@ -88,8 +98,86 @@ int CPlayer::Action(vector<unique_ptr<BaseVector>>& base) {
 
 	}
 
-	
 
+	
+	if (vec.x==0.0f)
+	{
+		player_state = STATE_IDLE;
+	}
+	else
+	{
+		player_state = STATE_FLY;
+	}
+
+	switch (player_state)
+	{
+	case STATE_IDLE:
+		if (anime_time < 0) 
+		{
+			if (anime_flame == 2)
+			{
+				anime_flame = 3;
+			}
+			else
+			{
+				anime_flame = 2;
+			}
+			anime_time = re_anime_time;
+		}
+		anime_time--;
+		break;
+	case STATE_FLY:
+		if (anime_time < 0)
+		{
+			if (vec.x>0.0f)
+			{
+				if (anime_flame == 4)
+				{
+					anime_flame = 5;
+				}
+				else
+				{
+					anime_flame = 4;
+				}
+			}
+			else if(vec.x<0.0f)
+			{
+				if (anime_flame == 0)
+				{
+					anime_flame = 1;
+				}
+				else
+				{
+					anime_flame = 0;
+				}
+			}
+
+			
+			anime_time = re_anime_time;
+		}
+		anime_time--;
+		break;
+	case STATE_DIE:
+		DrawFormatString(pos.x, pos.y, GetColor(255, 255, 255), "Die\nDie\nDie");
+		anime_flame_t = 1;
+		anime_flame = 0;
+		while (anime_flame < 4)
+		{
+
+
+			if (anime_time < 0)
+			{
+				anime_flame++;
+				anime_time = re_anime_time;
+			}
+
+			anime_time--;
+		}
+		break;
+
+	default:
+		break;
+	}
 
 	m_pos.x += vec.x;
 	m_pos.y += vec.y;
@@ -111,7 +199,7 @@ void CPlayer::Draw()
 	);
 
 	DrawFormatString(pos.x - 50, pos.y + 30, GetColor(255, 255, 255), "bull:%d,bomb:%d", bullet_num, bomb_num);
-	DrawFormatString(pos.x-50, pos.y+50, GetColor(255, 255, 255), "%f,%f", pos.x, pos.y);
+	DrawFormatString(pos.x-50, pos.y+50, GetColor(255, 255, 255), "%d", anime_time);
 }
 
 void CPlayer::Fire(vector<unique_ptr<BaseVector>>&base)

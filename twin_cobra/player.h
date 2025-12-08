@@ -24,10 +24,22 @@ public:
 	int bomb_num{ 2 };
 	int bomb_interval{ 20 };
 	bool bomb_flag{ true };
-
+	int anime_flame{ 0 };
+	int anime_flame_t{ 0 };
 	int bullet_id{ 0 };
 
 	float rad{ 0.0f };
 
 	int tipNo{ -1 };
+
+	enum PlayerState {
+		STATE_IDLE,
+		STATE_FLY,
+		STATE_DIE,
+	};
+
+	int player_state{ 0 };
+
+	int anime_time{ 5 };
+	int re_anime_time{ 5 };
 };

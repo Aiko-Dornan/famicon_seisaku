@@ -86,7 +86,7 @@ int CHeliEnemy::Action(vector<unique_ptr<BaseVector>>& base)
 		//FLAG = false;
 	}
 
-	if (fire_cooldown < 0)
+	if (fire_cooldown < 0&&state == EnemyState::Chase)
 	{
 		//base.emplace_back((unique_ptr<BaseVector>)new CEbullet(pos));
 

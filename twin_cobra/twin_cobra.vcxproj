@@ -163,6 +163,7 @@
     <ClInclude Include="2D_function.h" />
     <ClInclude Include="enemybase.h" />
     <ClInclude Include="enemybullet.h" />
+    <ClInclude Include="enemy_cannon.h" />
     <ClInclude Include="enemy_heli.h" />
     <ClInclude Include="function.h" />
     <ClInclude Include="game.h" />
@@ -191,6 +192,7 @@
     <ClCompile Include="2D_function.cpp" />
     <ClCompile Include="enemybase.cpp" />
     <ClCompile Include="enemybullet.cpp" />
+    <ClCompile Include="enemy_cannon.cpp" />
     <ClCompile Include="enemy_heli.cpp" />
     <ClCompile Include="itembase.cpp" />
     <ClCompile Include="testenemy.cpp" />

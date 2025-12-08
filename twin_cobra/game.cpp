@@ -7,6 +7,7 @@
 #include"background.h"
 #include"testenemy.h"
 #include"enemy_heli.h"
+#include"enemy_cannon.h"
 #include <fstream>
 #include <sstream>
 
@@ -115,6 +116,9 @@ int CGame::Update(){
 
 			case 1:
 				base.emplace_back(std::make_unique<CTestEnemy>(s.x, s.spawnY));
+				break;
+			case 2:
+				base.emplace_back((unique_ptr<BaseVector>)new CCannonEnemy(s.x, s.spawnY));
 				break;
 			}
 			
