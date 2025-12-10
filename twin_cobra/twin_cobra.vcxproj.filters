@@ -104,6 +104,9 @@
     <ClInclude Include="enemy_cannon.h">
       <Filter>ヘッダー ファイル\オブジェクト\enemy</Filter>
     </ClInclude>
+    <ClInclude Include="enemy_bonusheli.h">
+      <Filter>ヘッダー ファイル\オブジェクト\enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -161,6 +164,9 @@
       <Filter>ソース ファイル\オブジェクト\enemy</Filter>
     </ClCompile>
     <ClCompile Include="enemy_cannon.cpp">
+      <Filter>ソース ファイル\オブジェクト\enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="enemy_bonusheli.cpp">
       <Filter>ソース ファイル\オブジェクト\enemy</Filter>
     </ClCompile>
   </ItemGroup>

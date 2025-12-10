@@ -23,7 +23,7 @@ void CEnemyBase::Fire(std::vector<std::unique_ptr<BaseVector>>& base, Point targ
 
     switch (enemyid)
     {
-    case 0:
+    case 0://通常弾
         // 敵→プレイヤー方向ベクトル
        
         dir.x = (targetPos.x + 15) - pos.x;
@@ -40,7 +40,7 @@ void CEnemyBase::Fire(std::vector<std::unique_ptr<BaseVector>>& base, Point targ
         // 弾生成
         base.emplace_back((unique_ptr<BaseVector>)new CEbullet(pos, dir));
     break;
-    case 1:
+    case 1://正面に拡散弾
     {
         // 弾の基本方向（例: 右方向に飛ばす）
         Point dir;
@@ -64,7 +64,7 @@ void CEnemyBase::Fire(std::vector<std::unique_ptr<BaseVector>>& base, Point targ
         }
         break;
     }
-    case 2:
+    case 2://ボス
     {
         dir.x = (targetPos.x + 15) - pos.x;
         dir.y = (targetPos.y + 20) - pos.y;
@@ -106,23 +106,37 @@ void CEnemyBase::Fire(std::vector<std::unique_ptr<BaseVector>>& base, Point targ
 
 void CEnemyBase::Die(vector<unique_ptr<BaseVector>>& base)
 {
-    if (item_drop)
+    vec.x = 0.0f;
+    vec.y = 0.0f;
+    situation = DIE;
+    arrive_flag = false;
+    if (!arrive_flag && situation == DIE && !die_anime_flag)
     {
-        //アイテムドロップ処理 
-        ItemDrop(base,pos);
+        anime_flame_t = 2;
+        anime_flame = 0;
+        die_anime_flag = true;
 
-
-    }
-    else
-    {
-        if (GetRand(100)<20)
+        if (item_drop)
         {
             //アイテムドロップ処理 
             ItemDrop(base, pos);
+
+
         }
+        else
+        {
+            if (GetRand(100) < 20)
+            {
+                //アイテムドロップ処理 
+                ItemDrop(base, pos);
+            }
+        }
+
     }
 
+    
 
+    if (anime_flame >= 4)
     FLAG = false;
 }
 
@@ -131,5 +145,67 @@ void CEnemyBase::ItemDrop(vector<unique_ptr<BaseVector>>& base,Point pos)
     base.emplace_back((unique_ptr<BaseVector>)new CItemBase(pos));
     
     
+
+}
+
+void  CEnemyBase::Animetion(vector<unique_ptr<BaseVector>>&)
+{
+    switch (situation)
+    {
+        if (arrive_flag == true)
+        {
+    case IDLE:
+        if (anime_time < 0)
+        {
+            if (anime_flame == 0)
+            {
+                anime_flame = 1;
+            }
+            else
+            {
+                anime_flame = 0;
+            }
+            anime_time = re_anime_time;
+        }
+        anime_time--;
+        break;
+    case DAMEGED:
+
+        anime_flame_t = 1;
+
+        if (anime_time < 0)
+        {
+            anime_flame_t = 0;
+            situation = vault_situation;
+            anime_time = re_anime_time;
+        }
+        else
+        {
+            anime_time--;
+        }
+
+        break;
+
+        }
+    case DIE:
+        DrawFormatString(pos.x, pos.y, GetColor(255, 255, 255), "Die\nDie\nDie");
+
+        if (anime_time < 0 && anime_flame < 5)
+        {
+            anime_flame++;
+            anime_time = re_anime_time / 2;
+        }
+        else if (anime_flame < 5)
+        {
+            anime_time--;
+        }
+
+        break;
+
+
+    default:
+        break;
+    }
+
 
 }

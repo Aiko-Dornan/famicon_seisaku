@@ -80,9 +80,13 @@ int CPbullet::Action(vector<unique_ptr<BaseVector>>&base)
 		{
 			float drawX = (*i)->pos.x - g_BackGround->camera.x + WINDOW_WIDTH / 2;
 			float drawY = (*i)->pos.y - g_BackGround->camera.y + WINDOW_HEIGHT / 2;
-
-			if (HitCheck_box(drawX, drawY, pos.x, pos.y, eb->ImgWidth, eb->ImgHeight, radius, radius))
+			if (HitCheck_box(drawX, drawY, /*(*i)->pos.x, (*i)->pos.y,*/ pos.x, pos.y, (*i)->ImgWidth, (*i)->ImgHeight, radius, radius))
+			//if(HitCheck_box(this,enemy))
 			{
+				auto* enemy = (CEnemyBase*)(*i).get();
+				enemy->vault_situation = enemy->situation;
+				enemy->situation = 3;
+				enemy->anime_time = enemy->re_anime_time;
 				//Ç±Ç±Ç≈ìGÇÃHPÇå∏ÇÁÇ∑
 				//CEnemyBase* enemy = (CEnemyBase*)Get_obj(base, ENEMY);
 				(*i)->hp -= 1;  // Å© HPÇå∏ÇÁÇ∑ÅI
@@ -91,6 +95,7 @@ int CPbullet::Action(vector<unique_ptr<BaseVector>>&base)
 					FLAG = false;    // íeÇè¡Ç∑
 				}
 
+				
 				break;           // 1ëÃÇ…ìñÇΩÇ¡ÇΩÇÁèIóπ
 				/*if (HitCheck_box(enemy->pos.x, enemy->pos.y, pos.x, pos.y, enemy->radius, radius))
 				{

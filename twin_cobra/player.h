@@ -32,6 +32,9 @@ public:
 
 	int tipNo{ -1 };
 
+	bool arrive_flag{ true };
+	bool die_anime_flag{ false };
+
 	enum PlayerState {
 		STATE_IDLE,
 		STATE_FLY,

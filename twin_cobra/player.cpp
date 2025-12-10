@@ -84,7 +84,7 @@ int CPlayer::Action(vector<unique_ptr<BaseVector>>& base) {
 
 	if (hp<0)
 	{
-		
+		arrive_flag = false;
 		player_state = STATE_DIE;
 	}
 
@@ -98,15 +98,27 @@ int CPlayer::Action(vector<unique_ptr<BaseVector>>& base) {
 
 	}
 
+	if (!arrive_flag&&player_state==STATE_DIE&&!die_anime_flag)
+	{
+		anime_flame_t = 1;
+		anime_flame = 0;
+		die_anime_flag = true;
+		//base.emplace_back((unique_ptr<BaseVector>)new CBomb(pos));
+	}
 
 	
-	if (vec.x==0.0f)
+	if (vec.x==0.0f&&arrive_flag==true)
 	{
 		player_state = STATE_IDLE;
 	}
-	else
+	else if (arrive_flag==true)
 	{
-		player_state = STATE_FLY;
+		if (vec.x<0.0f||vec.x>0.0f)
+		{
+			player_state = STATE_FLY;
+		}
+
+		
 	}
 
 	switch (player_state)
@@ -159,20 +171,17 @@ int CPlayer::Action(vector<unique_ptr<BaseVector>>& base) {
 		break;
 	case STATE_DIE:
 		DrawFormatString(pos.x, pos.y, GetColor(255, 255, 255), "Die\nDie\nDie");
-		anime_flame_t = 1;
-		anime_flame = 0;
-		while (anime_flame < 4)
+		
+		if (anime_time<0&&anime_flame<5)
 		{
-
-
-			if (anime_time < 0)
-			{
-				anime_flame++;
-				anime_time = re_anime_time;
-			}
-
+			anime_flame++;
+			anime_time = re_anime_time/2;
+		}
+		else if (anime_flame<5)
+		{
 			anime_time--;
 		}
+		
 		break;
 
 	default:
