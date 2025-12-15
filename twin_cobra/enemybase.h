@@ -45,8 +45,10 @@ public:
 		IDLE,
 		MOVERL,
 		MOVEUD,
+		ROTATE,
 		DAMEGED,
 		DIE,
+		BREAK,
 	};
 
 	enum EnemyID {
@@ -74,6 +76,7 @@ public:
 
 	bool arrive_flag{ true };
 	bool die_anime_flag{ false };
+	bool break_flag{ false };
 
 };
 

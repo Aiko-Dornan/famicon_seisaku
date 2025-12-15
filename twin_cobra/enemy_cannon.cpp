@@ -6,16 +6,20 @@
 
 CCannonEnemy::CCannonEnemy(float fx, float fy)
 {
+	img = LoadGraph("img\\Turret.png");
 
-	ImgWidth = radius * 2;
-	ImgHeight = radius * 2;
+	ImgWidth = 34;
+	ImgHeight = 34;
+
+	CutX = anime_flame * ImgWidth;
+	CutY = anime_flame_t * ImgHeight;
 
 	vec.x = 0.0f;  // 初期直進速度
 	vec.y = 4.0f;
 
 	ID = ENEMY;
 
-	hp = 1;
+	hp = 10;
 
 	fire_cooldown = 25;
 	refire_cooldown = fire_cooldown;
@@ -31,11 +35,15 @@ CCannonEnemy::CCannonEnemy(float fx, float fy)
 
 	appear = true;
 
-	
+	situation = EnemySitu::ROTATE;
+	break_flag = true;
 }
 
 int CCannonEnemy::Action(vector<unique_ptr<BaseVector>>& base)
 {
+	CutX = anime_flame * ImgWidth;
+	CutY = anime_flame_t * ImgHeight;
+
 	CPlayer* p = (CPlayer*)Get_obj(base, PLAYER);
 	if (!p) return 0;
 
@@ -48,7 +56,7 @@ int CCannonEnemy::Action(vector<unique_ptr<BaseVector>>& base)
 
 
 
-	if (hp < 0/*||pos.y>p->pos.y+WINDOW_HEIGHT*/)
+	if (hp <= 0/*||pos.y>p->pos.y+WINDOW_HEIGHT*/)
 	{
 		Die(base);
 
@@ -68,6 +76,8 @@ int CCannonEnemy::Action(vector<unique_ptr<BaseVector>>& base)
 		fire_cooldown--;
 	}
 
+	Animetion(base);
+
 	return 0;
 }
 
@@ -78,11 +88,18 @@ void CCannonEnemy::Draw()
 
 	if (!g_BackGround) return;
 
+	DrawFormatString(drawX+40, drawY, GetColor(255, 255, 255), "%d", anime_flame);
 
+	//DrawFormatString(drawX, drawY, GetColor(255, 255, 255), "%f,%f", pos.x, pos.y);
 
-	DrawFormatString(drawX, drawY, GetColor(255, 255, 255), "%f,%f", pos.x, pos.y);
+	//DrawCircle(drawX, drawY, radius, GetColor(255, 255, 255), true);
 
-	DrawCircle(drawX, drawY, radius, GetColor(255, 255, 255), true);
+	DrawRectGraph(
+		drawX, drawY,
+		CutX, CutY,
+		ImgWidth, ImgHeight,
+		img, true
+	);
 
 	//// base から背景取得
 	//extern vector<unique_ptr<BaseVector>> base; // もしグローバルで持っているなら

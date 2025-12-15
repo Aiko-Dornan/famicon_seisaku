@@ -17,7 +17,7 @@ CPlayer::CPlayer()
 	//pos.x = WINDOW_WIDTH/2;
 	//pos.y = 6000;
 
-	hp = 3;
+	hp = 30000;
 
 	m_pos.x = WINDOW_WIDTH / 2;
 	m_pos.y = 6150;

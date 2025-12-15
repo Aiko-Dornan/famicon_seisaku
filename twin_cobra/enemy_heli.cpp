@@ -79,7 +79,7 @@ int CHeliEnemy::Action(vector<unique_ptr<BaseVector>>& base)
 
 
 
-	if (hp < 0/*||pos.y>p->pos.y+WINDOW_HEIGHT*/)
+	if (hp <= 0/*||pos.y>p->pos.y+WINDOW_HEIGHT*/)
 	{
 		Die(base);
 

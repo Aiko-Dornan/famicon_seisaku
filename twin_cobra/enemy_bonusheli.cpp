@@ -89,7 +89,7 @@ int CBonusHeliEnemy::Action(vector<unique_ptr<BaseVector>>& base)
 	pos.x += vec.x;
 	pos.y += vec.y;
 
-	if (hp < 0/*||pos.y>p->pos.y+WINDOW_HEIGHT*/)
+	if (hp <= 0/*||pos.y>p->pos.y+WINDOW_HEIGHT*/)
 	{
 		Die(base);
 
