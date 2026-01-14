@@ -84,12 +84,16 @@ int CPbullet::Action(vector<unique_ptr<BaseVector>>&base)
 			//if(HitCheck_box(this,enemy))
 			{
 				auto* enemy = (CEnemyBase*)(*i).get();
-				enemy->vault_situation = enemy->situation;
-				enemy->situation = enemy->DAMEGED;
-				enemy->anime_time = enemy->re_anime_time;
-				//‚±‚±‚Å“G‚ÌHP‚ğŒ¸‚ç‚·
-				//CEnemyBase* enemy = (CEnemyBase*)Get_obj(base, ENEMY);
-				(*i)->hp -= 1;  // © HP‚ğŒ¸‚ç‚·I
+			
+					//enemy->vault_situation2 = enemy->situation;
+					enemy->situation = enemy->DAMEGED;
+					enemy->anime_time = enemy->re_anime_time;
+					//‚±‚±‚Å“G‚ÌHP‚ğŒ¸‚ç‚·
+					//CEnemyBase* enemy = (CEnemyBase*)Get_obj(base, ENEMY);
+					(*i)->hp -= 1;  // © HP‚ğŒ¸‚ç‚·I
+				
+
+			
 				if (p->bullet_id != 1)
 				{
 					FLAG = false;    // ’e‚ğÁ‚·

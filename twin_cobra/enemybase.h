@@ -54,6 +54,7 @@ public:
 	enum EnemyID {
 		NORMALENEMY,
 		BONUSENEMY,
+		CHASEENEMY,
 		BOSSENEMY,
 
 	};
@@ -62,11 +63,12 @@ public:
 
 	EnemyState state{ 0 };
 	float switchDistance{ 0.0f };
-
+	
 	int move_down_time{ 20 };
 
 	int situation{ 0 };
 	int vault_situation{ 0 };
+	
 
 	int anime_flame{ 0 };
 	int anime_flame_t{ 0 };
@@ -77,6 +79,7 @@ public:
 	bool arrive_flag{ true };
 	bool die_anime_flag{ false };
 	bool break_flag{ false };
+
 
 };
 

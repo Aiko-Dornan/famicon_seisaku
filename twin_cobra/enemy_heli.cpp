@@ -23,7 +23,7 @@ CHeliEnemy::CHeliEnemy(float fx, float fy)
 	radius = 16;
 	item_drop = false;
 
-	enemyid = NORMALENEMY;
+	enemyid = CHASEENEMY;
 	pri = 10;
 
 	pos.x = fx;

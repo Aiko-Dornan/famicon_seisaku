@@ -57,23 +57,7 @@ void CEnemyBase::Fire(std::vector<std::unique_ptr<BaseVector>>& base, Point targ
 
             fire_cooldown = refire_cooldown;
 
-            //// ìGÅ®ÉvÉåÉCÉÑÅ[ï˚å¸ÉxÉNÉgÉã
-
-            //dir.x = (targetPos.x + 15) - pos.x;
-            //dir.y = (targetPos.y + 20) - pos.y;
-
-            //// ê≥ãKâª
-            //len = sqrtf(dir.x * dir.x + dir.y * dir.y);
-            //if (len != 0)
-            //{
-            //    dir.x /= len;
-            //    dir.y /= len;
-            //}
-            //Point firePos;
-            //firePos.x = pos.x + ImgWidth / 2;
-            //firePos.y = pos.y + ImgHeight / 2;
-            //// íeê∂ê¨
-            //base.emplace_back((unique_ptr<BaseVector>)new CEbullet(firePos, dir));
+            
             break;
         case 1://ê≥ñ Ç…ägéUíe
         {
@@ -99,7 +83,28 @@ void CEnemyBase::Fire(std::vector<std::unique_ptr<BaseVector>>& base, Point targ
             }
             break;
         }
-        case 2://É{ÉX
+        
+        case 2://í«Ç¢Ç©ÇØÇÈÉwÉä
+            // ìGÅ®ÉvÉåÉCÉÑÅ[ï˚å¸ÉxÉNÉgÉã
+
+            dir.x = (targetPos.x + 15) - pos.x;
+            dir.y = (targetPos.y + 20) - pos.y;
+
+            // ê≥ãKâª
+            len = sqrtf(dir.x * dir.x + dir.y * dir.y);
+            if (len != 0)
+            {
+                dir.x /= len;
+                dir.y /= len;
+            }
+            Point firePos;
+            firePos.x = pos.x + ImgWidth / 2;
+            firePos.y = pos.y + ImgHeight / 2;
+            // íeê∂ê¨
+            base.emplace_back((unique_ptr<BaseVector>)new CEbullet(firePos, dir));
+            break;
+        
+        case 3://É{ÉX
         {
             dir.x = (targetPos.x + 15) - pos.x;
             dir.y = (targetPos.y + 20) - pos.y;
@@ -130,6 +135,7 @@ void CEnemyBase::Fire(std::vector<std::unique_ptr<BaseVector>>& base, Point targ
 
             break;
         }
+
         default:
             break;
         }
@@ -203,6 +209,7 @@ void  CEnemyBase::Animetion(vector<unique_ptr<BaseVector>>& base)
     if (situation!=DAMEGED)
     {
         vault_situation = situation;
+
     }
 
     switch (situation)
@@ -267,10 +274,12 @@ void  CEnemyBase::Animetion(vector<unique_ptr<BaseVector>>& base)
                 anime_flame_t = 0;
                 situation = vault_situation;
                 anime_time = re_anime_time;
+                //damaged_flag = false;
             }
             else
             {
                 anime_time--;
+
             }
         }
         break;

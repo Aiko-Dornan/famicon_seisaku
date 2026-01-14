@@ -1,5 +1,42 @@
 ﻿  モジュール依存関係のソースをスキャンしています...
+  bomb.cpp
+C:\Users\GA2A\Desktop\vs_famicon\twin_cobra\bomb.cpp(95,23): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\GA2A\Desktop\vs_famicon\twin_cobra\bomb.cpp(95,16): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+  enemy_bonusheli.cpp
+C:\Users\GA2A\Desktop\vs_famicon\twin_cobra\enemy_bonusheli.cpp(127,26): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\GA2A\Desktop\vs_famicon\twin_cobra\enemy_bonusheli.cpp(127,19): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\GA2A\Desktop\vs_famicon\twin_cobra\enemy_bonusheli.cpp(130,10): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\GA2A\Desktop\vs_famicon\twin_cobra\enemy_bonusheli.cpp(130,3): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+  enemy_cannon.cpp
+C:\Users\GA2A\Desktop\vs_famicon\twin_cobra\enemy_cannon.cpp(91,29): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\GA2A\Desktop\vs_famicon\twin_cobra\enemy_cannon.cpp(91,24): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\GA2A\Desktop\vs_famicon\twin_cobra\enemy_cannon.cpp(98,10): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\GA2A\Desktop\vs_famicon\twin_cobra\enemy_cannon.cpp(98,3): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+  enemy_heli.cpp
+C:\Users\GA2A\Desktop\vs_famicon\twin_cobra\enemy_heli.cpp(114,26): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\GA2A\Desktop\vs_famicon\twin_cobra\enemy_heli.cpp(114,19): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\GA2A\Desktop\vs_famicon\twin_cobra\enemy_heli.cpp(116,20): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\GA2A\Desktop\vs_famicon\twin_cobra\enemy_heli.cpp(116,13): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
   enemybase.cpp
-C:\Users\GA2A\Desktop\famiconTC\twin_cobra\enemybase.cpp(280,36): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-C:\Users\GA2A\Desktop\famiconTC\twin_cobra\enemybase.cpp(280,29): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
-  twin_cobra.vcxproj -> C:\Users\GA2A\Desktop\famiconTC\x64\Debug\twin_cobra.exe
+C:\Users\GA2A\Desktop\vs_famicon\twin_cobra\enemybase.cpp(289,36): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\GA2A\Desktop\vs_famicon\twin_cobra\enemybase.cpp(289,29): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+  enemybullet.cpp
+C:\Users\GA2A\Desktop\vs_famicon\twin_cobra\enemybullet.cpp(77,20): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\GA2A\Desktop\vs_famicon\twin_cobra\enemybullet.cpp(77,13): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+  game.cpp
+C:\Users\GA2A\Desktop\vs_famicon\twin_cobra\game.cpp(142,37): warning C4267: '引数': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+  itembase.cpp
+C:\Users\GA2A\Desktop\vs_famicon\twin_cobra\itembase.cpp(149,20): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\GA2A\Desktop\vs_famicon\twin_cobra\itembase.cpp(149,13): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+  playerbullet.cpp
+C:\Users\GA2A\Desktop\vs_famicon\twin_cobra\playerbullet.cpp(142,23): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\GA2A\Desktop\vs_famicon\twin_cobra\playerbullet.cpp(142,16): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\GA2A\Desktop\vs_famicon\twin_cobra\playerbullet.cpp(144,32): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\GA2A\Desktop\vs_famicon\twin_cobra\playerbullet.cpp(144,22): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+  testenemy.cpp
+C:\Users\GA2A\Desktop\vs_famicon\twin_cobra\testenemy.cpp(92,26): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\GA2A\Desktop\vs_famicon\twin_cobra\testenemy.cpp(92,19): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\GA2A\Desktop\vs_famicon\twin_cobra\testenemy.cpp(94,20): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\GA2A\Desktop\vs_famicon\twin_cobra\testenemy.cpp(94,13): warning C4244: '引数': 'float' から 'int' への変換です。データが失われる可能性があります。
+  コードを生成中...
+  twin_cobra.vcxproj -> C:\Users\GA2A\Desktop\vs_famicon\x64\Debug\twin_cobra.exe
