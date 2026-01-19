@@ -153,17 +153,7 @@ void CEnemyBase::Die(vector<unique_ptr<BaseVector>>& base)
     vec.x = 0.0f;
     vec.y = 0.0f;
 
-    if (break_flag)
-    {
-        situation = BREAK;
-    }
-    else
-    {
-        situation = DIE;
-        if (anime_flame >= 4)
-            FLAG = false;
-    }
-
+    
    
     
     arrive_flag = false;
@@ -172,6 +162,17 @@ void CEnemyBase::Die(vector<unique_ptr<BaseVector>>& base)
         anime_flame_t = 2;
         anime_flame = 0;
         die_anime_flag = true;
+
+        /*if (break_flag)
+        {
+            situation = BREAK;
+        }
+        else
+        {
+            situation = DIE;
+            if (anime_flame >= 4)
+                FLAG = false;
+        }*/
 
         if (item_drop)
         {
@@ -191,7 +192,17 @@ void CEnemyBase::Die(vector<unique_ptr<BaseVector>>& base)
         
     }
 
-    
+
+    if (break_flag)
+    {
+        situation = BREAK;
+    }
+    else
+    {
+        situation = DIE;
+        if (anime_flame >= 4)
+            FLAG = false;
+    }
 
     
 }
@@ -259,7 +270,70 @@ void  CEnemyBase::Animetion(vector<unique_ptr<BaseVector>>& base)
                 2  // ‰Eã
             };
 
-            anime_flame = DirToImg[dir8];
+            if (drawY>p->pos.y&&HeliORTurretRotate==2)
+            {
+               if (anime_time < 0)
+                {
+                    if (anime_flame == DirToImg[2] * HeliORTurretRotate)
+                    {
+                        anime_flame = DirToImg[2] * HeliORTurretRotate+1;
+                    }
+                    else
+                    {
+                        anime_flame =DirToImg[2] * HeliORTurretRotate;
+                    }
+                    anime_time = re_anime_time;
+                    
+                }
+               
+                anime_time--;
+                state = EnemyState::Approach;
+               
+               
+            }
+            else if (HeliORTurretRotate == 2&&state == EnemyState::Approach)
+            {
+                if (anime_time < 0)
+                {
+                    if (anime_flame == DirToImg[2] * HeliORTurretRotate)
+                    {
+                        anime_flame = DirToImg[2] * HeliORTurretRotate+1;
+                    }
+                    else
+                    {
+                        anime_flame = DirToImg[2] * HeliORTurretRotate;
+                    }
+                    anime_time = re_anime_time;
+                }
+                anime_time--;
+
+                
+            }
+            else if (HeliORTurretRotate == 2 && state == EnemyState::Chase)
+            {
+
+                if (anime_time < 0)
+                {
+                    if (anime_flame == DirToImg[dir8] * HeliORTurretRotate)
+                    {
+                        anime_flame = DirToImg[dir8] * HeliORTurretRotate + 1;
+                    }
+                    else
+                    {
+                        anime_flame = DirToImg[dir8] * HeliORTurretRotate;
+                    }
+                    anime_time = re_anime_time;
+                }
+                anime_time--;
+
+                
+
+            }
+            else if (HeliORTurretRotate == 1)
+            {
+                anime_flame = DirToImg[dir8] * HeliORTurretRotate;
+            }
+            
             anime_flame_t = 0;
         }
         break;

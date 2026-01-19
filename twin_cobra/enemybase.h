@@ -69,6 +69,7 @@ public:
 	int situation{ 0 };
 	int vault_situation{ 0 };
 	
+	int HeliORTurretRotate{ 1 };
 
 	int anime_flame{ 0 };
 	int anime_flame_t{ 0 };

@@ -19,7 +19,7 @@ CCannonEnemy::CCannonEnemy(float fx, float fy)
 
 	ID = ENEMY;
 
-	hp = 10;
+	hp = 2;
 
 	fire_cooldown = 25;
 	refire_cooldown = fire_cooldown;
@@ -36,6 +36,7 @@ CCannonEnemy::CCannonEnemy(float fx, float fy)
 	appear = true;
 
 	situation = EnemySitu::ROTATE;
+	HeliORTurretRotate = 1;
 	break_flag = true;
 }
 

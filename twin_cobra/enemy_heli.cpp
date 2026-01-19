@@ -6,9 +6,13 @@
 
 CHeliEnemy::CHeliEnemy(float fx, float fy)
 {
+	img = LoadGraph("img\\SmallHeli.png");
 
-	ImgWidth = radius * 2;
-	ImgHeight = radius * 2;
+	ImgWidth = 28;
+	ImgHeight = 28;
+
+	CutX = anime_flame * ImgWidth;
+	CutY = anime_flame_t * ImgHeight;
 
 	vec.x = 0.0f;  // 初期直進速度
 	vec.y = 4.0f;
@@ -20,7 +24,8 @@ CHeliEnemy::CHeliEnemy(float fx, float fy)
 	fire_cooldown = 25;
 	refire_cooldown = fire_cooldown;
 
-	radius = 16;
+	
+
 	item_drop = false;
 
 	enemyid = CHASEENEMY;
@@ -31,8 +36,10 @@ CHeliEnemy::CHeliEnemy(float fx, float fy)
 
 	appear = true;
 
+	situation = EnemySitu::ROTATE;
+	HeliORTurretRotate = 2;
 	state = EnemyState::Approach; // 初期状態は直進
-	switchDistance = 200.0f;      // プレイヤー追尾に切替える距離
+	switchDistance = 400.0f;      // プレイヤー追尾に切替える距離
 }
 
 int CHeliEnemy::Action(vector<unique_ptr<BaseVector>>& base)
@@ -42,6 +49,9 @@ int CHeliEnemy::Action(vector<unique_ptr<BaseVector>>& base)
 
 	drawX = pos.x - g_BackGround->camera.x + WINDOW_WIDTH / 2;
 	drawY = pos.y - g_BackGround->camera.y + WINDOW_HEIGHT / 2;
+
+	CutX = anime_flame * ImgWidth;
+	CutY = anime_flame_t * ImgHeight;
 
 	// プレイヤーとの距離
 	float dx = p->pos.x - drawX;
@@ -81,6 +91,7 @@ int CHeliEnemy::Action(vector<unique_ptr<BaseVector>>& base)
 
 	if (hp <= 0/*||pos.y>p->pos.y+WINDOW_HEIGHT*/)
 	{
+		state = EnemyState::Approach;
 		Die(base);
 
 		//FLAG = false;
@@ -99,6 +110,8 @@ int CHeliEnemy::Action(vector<unique_ptr<BaseVector>>& base)
 		fire_cooldown--;
 	}
 
+	Animetion(base);
+
 	return 0;
 }
 
@@ -111,9 +124,17 @@ void CHeliEnemy::Draw()
 
 
 
-	DrawFormatString(drawX, drawY, GetColor(255, 255, 255), "%f,%f", pos.x, pos.y);
+	DrawFormatString(drawX + 40, drawY, GetColor(255, 255, 255), "%d", anime_flame);
+	DrawFormatString(drawX - 40, drawY, GetColor(255, 255, 255), "%d", anime_time);
 
-	DrawCircle(drawX, drawY, radius, GetColor(255, 255, 255), true);
+	DrawRectGraph(
+		drawX, drawY,
+		CutX, CutY,
+		ImgWidth, ImgHeight,
+		img, true
+	);
+
+	//DrawCircle(drawX, drawY, radius, GetColor(255, 255, 255), true);
 
 	//// base から背景取得
 	//extern vector<unique_ptr<BaseVector>> base; // もしグローバルで持っているなら

@@ -44,7 +44,7 @@ CBonusHeliEnemy::CBonusHeliEnemy(float fx, float fy)
 
 	appear = true;
 
-	refire_cooldown = 100;
+	
 	
 	switchDistance = 200.0f;      // ƒvƒŒƒCƒ„[’Ç”ö‚ÉØ‘Ö‚¦‚é‹——£
 }
