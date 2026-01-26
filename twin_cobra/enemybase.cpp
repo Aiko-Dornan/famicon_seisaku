@@ -123,9 +123,9 @@ void CEnemyBase::Fire(std::vector<std::unique_ptr<BaseVector>>& base, Point targ
 
             // 拡散角度 (ラジアン)
             float spreadAngle = 0.2f; // ±0.2ラジアン（約11.5度）
-            float angles[3] = { -spreadAngle, 0.0f, spreadAngle };
+            float angles[5] = { -spreadAngle*2, -spreadAngle, 0.0f, spreadAngle,spreadAngle*2 };
 
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 5; i++)
             {
                 float cosA = cosf(angles[i]);
                 float sinA = sinf(angles[i]);

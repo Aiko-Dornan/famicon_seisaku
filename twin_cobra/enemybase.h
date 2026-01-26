@@ -81,6 +81,11 @@ public:
 	bool die_anime_flag{ false };
 	bool break_flag{ false };
 
+	bool stop_flag{ false };
+	bool right_fire{ true };
+	int stop_moving_time{ 30 };
+	int allow_moving_time{ 30 };
+	int move_limit{ 570 };
 
 };
 

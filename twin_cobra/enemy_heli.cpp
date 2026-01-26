@@ -72,7 +72,7 @@ int CHeliEnemy::Action(vector<unique_ptr<BaseVector>>& base)
 	// ˆÚ“®
 	if (state == EnemyState::Approach)
 	{
-		pos.x += vec.x;
+		//pos.x += vec.x;
 		pos.y += vec.y;
 	}
 	else if (state == EnemyState::Chase)
@@ -98,7 +98,8 @@ int CHeliEnemy::Action(vector<unique_ptr<BaseVector>>& base)
 	{
 		state = EnemyState::Approach;
 		Die(base);
-
+		vec.x = 0.0f;
+		vec.y = 0.0f;
 		//FLAG = false;
 	}
 
