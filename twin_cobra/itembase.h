@@ -13,7 +13,7 @@ public:
 	int Action(vector<unique_ptr<BaseVector>>&);
 	void Draw();
 
-
+	void RandomMove();
 
 	void ItemGet(vector<unique_ptr<BaseVector>>&);
 
@@ -37,8 +37,13 @@ public:
 	int item_color_g{ 0 };
 	int item_color_b{ 0 };
 
+	int anime_flame{ 0 };
+	int anime_flame_t{ 0 };
+
 	int color_change_time{ 50 };
 	int color_type{ 0 };
 
+	int random_time{ 30 };
+	int random_move{ 0 };
 
 };

@@ -4,9 +4,14 @@
 #include"enemybase.h"
 #include"background.h"
 
-CPbullet::CPbullet(float posx,float posy,float ang)
+CPbullet::CPbullet(float posx,float posy,float ang,int BulletID)
 {
-	CPlayer cp;
+	//img = LoadGraph("img\\PBulletRed.png");
+
+	//ImgWidth = 8;
+	//ImgHeight = 12;
+
+	
 
 	this->pos.x = posx;
 	this->pos.y = posy;
@@ -23,6 +28,10 @@ CPbullet::CPbullet(float posx,float posy,float ang)
 	
 	pri = 10;
 
+	//this->testid = BulletID;
+
+	// íeéÌÇ≤Ç∆ÇÃâÊëúê›íË
+	ChangeID(BulletID);
 	
 }
 
@@ -52,19 +61,29 @@ int CPbullet::Action(vector<unique_ptr<BaseVector>>&base)
 		vec.y = -8.0f;
 
 		
+		
 		break;
 	case 1 ://ÉåÅ[ÉUÅ[
 		vec.y = -12.0f;
+
+		
+
 		break;
 	case 2://ägéU
 		-8.0f;
 		pos.x += cosf(angle) * speed;
 		pos.y += sinf(angle) * speed;
+
+		
+
 		break;
 	case 3://è\éö
 		-4.0f;
 		pos.x += cosf(angle) * speed;
 		pos.y += sinf(angle) * speed;
+
+		
+
 		break;
 
 	default:
@@ -80,7 +99,7 @@ int CPbullet::Action(vector<unique_ptr<BaseVector>>&base)
 		{
 			float drawX = (*i)->pos.x - g_BackGround->camera.x + WINDOW_WIDTH / 2;
 			float drawY = (*i)->pos.y - g_BackGround->camera.y + WINDOW_HEIGHT / 2;
-			if (HitCheck_box(drawX, drawY, /*(*i)->pos.x, (*i)->pos.y,*/ pos.x, pos.y, (*i)->ImgWidth, (*i)->ImgHeight, radius, radius)&&(*i)->hp>0)
+			if (HitCheck_box(drawX, drawY, /*(*i)->pos.x, (*i)->pos.y,*/ pos.x, pos.y, (*i)->ImgWidth, (*i)->ImgHeight, ImgWidth, ImgHeight)&&(*i)->hp>0)
 			//if(HitCheck_box(this,enemy))
 			{
 				auto* enemy = (CEnemyBase*)(*i).get();
@@ -132,15 +151,57 @@ int CPbullet::Action(vector<unique_ptr<BaseVector>>&base)
 
 	}
 
-	testid=p->bullet_id;
+	//testid=p->bullet_id;
+
+	
 
 	return 0;
 }
 
 void CPbullet::Draw()
 {
-	DrawCircle(pos.x, pos.y, radius,GetColor(255, 255, 255), true);
+	DrawGraph(pos.x, pos.y, img, true);
 
-	DrawFormatString(pos.x, pos.y + 5, GetColor(255, 255, 255), "%d", testid);
+	//DrawCircle(pos.x, pos.y, radius,GetColor(255, 255, 255), true);
+
+	//DrawFormatString(pos.x, pos.y + 5, GetColor(255, 255, 255), "%d", testid);
 	
+}
+
+void CPbullet::ChangeID(int bulletID)
+{
+
+	/*CPlayer* cp = new CPlayer;*/
+
+
+	switch (bulletID)
+	{
+	case 0://ÉmÅ[É}Éã
+		img = LoadGraph("img\\PBulletRed.png");
+
+		ImgWidth = 8;
+		ImgHeight = 12;
+		break;
+	case 1://ÉåÅ[ÉUÅ[
+		img = LoadGraph("img\\PBulletGreen.png");
+
+		ImgWidth = 7;
+		ImgHeight = 14;
+		break;
+	case 2://ägéU
+		img = LoadGraph("img\\PBulletBlue.png");
+
+		ImgWidth = 8;
+		ImgHeight = 8;
+		break;
+	case 3://è\éö
+		img = LoadGraph("img\\PBulletYellow.png");
+
+		ImgWidth = 8;
+		ImgHeight = 8;
+		break;
+	default:
+		break;
+	}
+
 }

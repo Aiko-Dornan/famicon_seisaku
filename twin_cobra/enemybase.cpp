@@ -79,7 +79,11 @@ void CEnemyBase::Fire(std::vector<std::unique_ptr<BaseVector>>& base, Point targ
                 bulletDir.x = dir.x * cosA - dir.y * sinA;
                 bulletDir.y = dir.x * sinA + dir.y * cosA;
 
-                base.emplace_back((unique_ptr<BaseVector>)new CEbullet(pos, bulletDir));
+                Point firePos;
+                firePos.x = pos.x + ImgWidth/3;
+                firePos.y = pos.y + ImgHeight / 2;
+
+                base.emplace_back((unique_ptr<BaseVector>)new CEbullet(firePos, bulletDir));
             }
             break;
         }

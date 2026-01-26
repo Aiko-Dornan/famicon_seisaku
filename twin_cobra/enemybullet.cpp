@@ -6,6 +6,10 @@
 
 CEbullet::CEbullet(Point startPos, Point dir)
 {
+	img = LoadGraph("img\\EnemyBullet.png");
+
+	ImgWidth = 8;
+	ImgHeight = 8;
 
 	//vec.y += 8.0f;
 
@@ -47,7 +51,7 @@ int CEbullet::Action(vector<unique_ptr<BaseVector>>& base)
 	{
 		if ((*i)->ID == PLAYER)
 		{
-			if (HitCheck_box((*i)->pos.x, (*i)->pos.y, drawX, drawY, p->ImgWidth, p->ImgHeight, radius, radius))
+			if (HitCheck_box((*i)->pos.x, (*i)->pos.y, drawX, drawY, p->ImgWidth, p->ImgHeight, ImgWidth, ImgHeight))
 			{
 				//‚±‚±‚Å“G‚ÌHP‚ðŒ¸‚ç‚·
 				//CPlayer* player = (CPlayer*)Get_obj(base, PLAYER);
@@ -74,7 +78,7 @@ int CEbullet::Action(vector<unique_ptr<BaseVector>>& base)
 
 void CEbullet::Draw()
 {
-	DrawCircle(drawX, drawY, radius, GetColor(255, 255, 255), true);
+	DrawGraph(drawX, drawY, img, true);
 
 
 }

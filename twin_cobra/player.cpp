@@ -223,7 +223,7 @@ void CPlayer::Fire(vector<unique_ptr<BaseVector>>&base)
 		{
 			if (bullet_num == 1)
 			{
-				base.emplace_back((unique_ptr<BaseVector>)new CPbullet(pos.x, pos.y,rad));
+				base.emplace_back((unique_ptr<BaseVector>)new CPbullet(pos.x, pos.y,rad,bullet_id));
 			}
 			else
 			{
@@ -231,28 +231,28 @@ void CPlayer::Fire(vector<unique_ptr<BaseVector>>&base)
 				{
 					if (i % 2 == 0)
 					{
-						base.emplace_back((unique_ptr<BaseVector>)new CPbullet(pos.x + (7-bullet_id*4) * (i - 1), pos.y, rad));
+						base.emplace_back((unique_ptr<BaseVector>)new CPbullet(pos.x + (7-bullet_id*4) * (i - 1), pos.y, rad, bullet_id));
 					}
 					else
 					{
-						base.emplace_back((unique_ptr<BaseVector>)new CPbullet(pos.x - (7 - bullet_id * 4) * i, pos.y, rad));
+						base.emplace_back((unique_ptr<BaseVector>)new CPbullet(pos.x - (7 - bullet_id * 4) * i, pos.y, rad, bullet_id));
 					}
 				}
 				else
 				{
 					if (i == 1)
 					{
-						base.emplace_back((unique_ptr<BaseVector>)new CPbullet(pos.x, pos.y, rad));
+						base.emplace_back((unique_ptr<BaseVector>)new CPbullet(pos.x, pos.y, rad, bullet_id));
 					}
 					else
 					{
 						if (i % 2 == 0)
 						{
-							base.emplace_back((unique_ptr<BaseVector>)new CPbullet(pos.x + (7 - bullet_id * 4) * (i), pos.y, rad));
+							base.emplace_back((unique_ptr<BaseVector>)new CPbullet(pos.x + (7 - bullet_id * 4) * (i), pos.y, rad, bullet_id));
 						}
 						else
 						{
-							base.emplace_back((unique_ptr<BaseVector>)new CPbullet(pos.x - (7 - bullet_id * 4) * (i - 1), pos.y, rad));
+							base.emplace_back((unique_ptr<BaseVector>)new CPbullet(pos.x - (7 - bullet_id * 4) * (i - 1), pos.y, rad, bullet_id));
 						}
 					}
 
@@ -288,7 +288,7 @@ void CPlayer::Fire(vector<unique_ptr<BaseVector>>&base)
 
 			float angle = -90.0f * rad + t * rad;
 
-			base.emplace_back((unique_ptr<BaseVector>)new CPbullet(pos.x, pos.y, angle));
+			base.emplace_back((unique_ptr<BaseVector>)new CPbullet(pos.x, pos.y, angle, bullet_id));
 		}
 	}
 	//-------------------------------------
@@ -340,11 +340,11 @@ void CPlayer::Fire(vector<unique_ptr<BaseVector>>&base)
 					offX = t * offsetStep;
 				}
 				else                  // âEÅEç∂ Å® y ÇÇ∏ÇÁÇ∑
-				{
+				{ 
 					offY = t * offsetStep;
 				}
 
-				base.emplace_back((unique_ptr<BaseVector>)new CPbullet(pos.x + offX,pos.y + offY,angle));
+				base.emplace_back((unique_ptr<BaseVector>)new CPbullet(pos.x + offX,pos.y + offY,angle, bullet_id));
 			}
 		}
 	}

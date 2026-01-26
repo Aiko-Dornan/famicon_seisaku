@@ -4,9 +4,17 @@
 #include"player.h"
 #include"playerbullet.h"
 #include"background.h"
+#include"playerbullet.h"
 
 CItemBase::CItemBase(Point pos)
 {
+	img = LoadGraph("img\\Item.png");
+
+	ImgWidth = 18;
+	ImgHeight = 18;
+
+	CutX = anime_flame * ImgWidth;
+	CutY = anime_flame_t * ImgHeight;
 
 	this->pos = pos;
 	vec.y = 2.0f;
@@ -21,7 +29,7 @@ CItemBase::CItemBase(Point pos)
 	{
 	case CItemBase::Upgrade:
 		
-		item_color_r = 255;
+		anime_flame=1;
 		break;
 	case CItemBase::Change:
 		
@@ -30,7 +38,7 @@ CItemBase::CItemBase(Point pos)
 		break;
 	case CItemBase::Bomb:
 		
-		item_color_r = 50;
+		anime_flame = 0;
 		break;
 	default:
 		item_color_r = 0;
@@ -43,21 +51,11 @@ CItemBase::CItemBase(Point pos)
 
 int CItemBase::Action(vector<unique_ptr<BaseVector>>& base)
 {
+	CutX = anime_flame * ImgWidth;
+	CutY = anime_flame_t * ImgHeight;
+
 	drawX = pos.x - g_BackGround->camera.x + WINDOW_WIDTH / 2;
 	drawY = pos.y - g_BackGround->camera.y + WINDOW_HEIGHT / 2;
-
-	/*CEnemyBase* eb = (CEnemyBase*)Get_obj(base, ENEMY);
-
-	if (!appear)
-	{
-
-
-		pos = eb->pos;
-
-		
-
-		appear = true;
-	}*/
 
 	if (color_change_time>0)
 	{
@@ -83,30 +81,21 @@ int CItemBase::Action(vector<unique_ptr<BaseVector>>& base)
 		switch (color_type)
 		{
 		case 0:
-			item_color_r = 255;
-			item_color_g = 0;
-			item_color_b = 0;
+			anime_flame = 2;
 			break;
 		case 1:
-			item_color_r = 0;
-			item_color_g = 255;
-			item_color_b = 0;
+			anime_flame = 3;
 			break;
 		case 2:
-			item_color_r = 0;
-			item_color_g = 0;
-			item_color_b = 0;
+			anime_flame = 4;
 			break;
 		case 3:
-			item_color_r = 255;
-			item_color_g = 255;
-			item_color_b = 0;
+			anime_flame = 5;
 			break;
 
 		default:
 			break;
 		}
-
 
 	}
 
@@ -120,7 +109,7 @@ int CItemBase::Action(vector<unique_ptr<BaseVector>>& base)
 	{
 		if ((*i)->ID == PLAYER)
 		{
-			if (HitCheck_box((*i)->pos.x, (*i)->pos.y, drawX, drawY, p->ImgWidth, p->ImgHeight, radius, radius))
+			if (HitCheck_box((*i)->pos.x, (*i)->pos.y, drawX, drawY, p->ImgWidth, p->ImgHeight, ImgWidth, ImgHeight))
 			{
 
 
@@ -134,9 +123,18 @@ int CItemBase::Action(vector<unique_ptr<BaseVector>>& base)
 
 		}
 	}
+	pos.x += vec.x;
 	pos.y += vec.y;
 
 
+	if (random_time<0)
+	{
+		RandomMove();
+	}
+	else
+	{
+		random_time--;
+	}
 	
 
 
@@ -146,8 +144,13 @@ int CItemBase::Action(vector<unique_ptr<BaseVector>>& base)
 
 void CItemBase::Draw()
 {
-	DrawCircle(drawX, drawY, radius, GetColor(item_color_r, item_color_g, item_color_b), true);
-
+	//DrawCircle(drawX, drawY, radius, GetColor(item_color_r, item_color_g, item_color_b), true);
+	DrawRectGraph(
+		drawX, drawY,
+		CutX, CutY,
+		ImgWidth, ImgHeight,
+		img, true
+	);
 	
 }
 
@@ -185,6 +188,7 @@ void CItemBase::ItemGet(vector<unique_ptr<BaseVector>>&base)
 
 			p->bullet_num = 1;
 			p->bullet_id = color_type;
+
 		}
 		
 		break;
@@ -196,5 +200,36 @@ void CItemBase::ItemGet(vector<unique_ptr<BaseVector>>&base)
 		break;
 	}
 
+
+}
+
+void CItemBase::RandomMove()
+{
+	random_move = GetRand(3);
+
+	switch (random_move)
+	{
+	case 0:
+		vec.x = 1.0f;
+		vec.y = 0.0f;
+		break;
+	case 1:
+		vec.x = -1.0f;
+		vec.y = 0.0f;
+		break;
+	case 2:
+		vec.x = 0.0f;
+		vec.y = 1.0f;
+		break;
+	case 3:
+		vec.x = 0.0f;
+		vec.y = -1.0f;
+		
+		break;
+	default:
+		break;
+	}
+
+	random_time = GetRand(40);
 
 }

@@ -30,7 +30,7 @@ CBonusHeliEnemy::CBonusHeliEnemy(float fx, float fy)
 
 	hp = 10;
 
-	fire_cooldown = 25;
+	fire_cooldown = 40;
 	refire_cooldown = fire_cooldown;
 
 	radius = 16;
