@@ -21,7 +21,7 @@ CBossEnemy::CBossEnemy(float fx, float fy)
 
 	hp = 100;
 
-	fire_cooldown = 40;
+	fire_cooldown = 45;
 	refire_cooldown = fire_cooldown;
 
 	radius = 16;
@@ -35,7 +35,9 @@ CBossEnemy::CBossEnemy(float fx, float fy)
 
 	appear = true;
 
-
+	// š ƒXƒNƒ[ƒ‹’âŽ~
+	if (g_BackGround)
+		g_BackGround->stopScroll = true;
 
 	
 }
@@ -57,31 +59,54 @@ int CBossEnemy::Action(vector<unique_ptr<BaseVector>>& base)
 	{
 		stop_moving_time--;
 		vec.y = 0.0f;
-
+		anime_flame = 0;
 		if (stop_moving_time<0)
 		{
 			stop_flag = false;
-			allow_moving_time = 30;
+			allow_moving_time = 45;
+		}
+
+		//if (pos.y > move_limit && p->m_pos.y - drawY > 50&&!limit)
+		//{
+		//	Fwd_Bwd_Flag = false;
+		//}
+		//else
+		//{
+		//	limit = true;
+		//	//Fwd_Bwd_Flag = true;
+		//}
+	
+		switch (GetRand(1))
+		{
+		case 0:
+			if (pos.y > move_limit)
+			{
+				Fwd_Bwd_Flag = false;
+				break;
+			}
+			
+		case 1:
+			if (pos.y < 800)
+			{
+				Fwd_Bwd_Flag = true;
+				break;
+			}
+		default:
+			Fwd_Bwd_Flag = false;
+			break;
 		}
 
 	}
 	else
 	{
-		if (pos.y>move_limit)
-		{
-			vec.y = -2.0f;
-		}
-		else
-		{
-			vec.y = 2.0f;
-		}
-
+		vec.y =Fwd_Bwd_Flag? 0.7f: -0.7f;
+		
 		allow_moving_time--;
 
 		if (allow_moving_time<0)
 		{
 			stop_flag = true;
-			stop_moving_time = 30;
+			stop_moving_time = 45;
 		}
 
 	}
@@ -93,6 +118,9 @@ int CBossEnemy::Action(vector<unique_ptr<BaseVector>>& base)
 
 	if (hp <= 0/*||pos.y>p->pos.y+WINDOW_HEIGHT*/)
 	{
+		if (g_BackGround)
+			g_BackGround->stopScroll = false;
+
 		Die(base);
 
 		//FLAG = false;

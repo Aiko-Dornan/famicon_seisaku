@@ -13,7 +13,7 @@ public:
 	int Action(vector<unique_ptr<BaseVector>>&);
 	void Draw();
 
-
-
+	bool Fwd_Bwd_Flag{ true };
+	bool limit{ false };
 
 };

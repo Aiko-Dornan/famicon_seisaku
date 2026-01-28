@@ -1,5 +1,6 @@
 #include"player.h"
 #include"playerbullet.h"
+#include"background.h"
 #include"bomb.h"
 
 CPlayer::CPlayer()
@@ -20,7 +21,7 @@ CPlayer::CPlayer()
 	hp = 30000;
 
 	m_pos.x = WINDOW_WIDTH / 2;
-	m_pos.y = 6150;
+	m_pos.y = /*6150;*/3000;
 
 	pos = m_pos;
 
@@ -103,6 +104,10 @@ int CPlayer::Action(vector<unique_ptr<BaseVector>>& base) {
 		anime_flame_t = 1;
 		anime_flame = 0;
 		die_anime_flag = true;
+
+		if (g_BackGround)
+			g_BackGround->stopScroll = true;
+
 		//base.emplace_back((unique_ptr<BaseVector>)new CBomb(pos));
 	}
 

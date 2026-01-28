@@ -59,7 +59,7 @@ int CHeliEnemy::Action(vector<unique_ptr<BaseVector>>& base)
 	float dist = sqrtf(dx * dx + dy * dy);
 
 	// ó‘ÔØ‘Ö
-	if (state == EnemyState::Approach && dist < switchDistance&&dy>-20)
+	if (state == EnemyState::Approach && dist < switchDistance&&dy>-20&&hp>0)
 	{
 		state = EnemyState::Chase;
 	}

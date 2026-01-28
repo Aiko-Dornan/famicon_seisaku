@@ -16,6 +16,7 @@ public:
 	Point camera{ 0,0 };
 
 	float scrollspeed{ 0.5f };
+	bool stopScroll{ false };
 
 	int tipNo{ -1 };
 

@@ -14,10 +14,10 @@ CBackGround::CBackGround()
 
     // マップサイズ
     ImgWidth = 388;
-    ImgHeight = 6311;
+    ImgHeight = 6301;
 
     camera.x = WINDOW_WIDTH / 2;
-    camera.y = ImgHeight - WINDOW_HEIGHT / 2; // 最初は一番下から開始
+    camera.y = /*ImgHeight*/3000- WINDOW_HEIGHT / 2; // 最初は一番下から開始
 
     ID = BACKGROUND;
    
@@ -30,7 +30,11 @@ int CBackGround::Action(vector<unique_ptr<BaseVector>>& base)
 
     // 強制スクロール
     float prevCameraY = camera.y;
-    camera.y -= scrollspeed;
+    if (!stopScroll||camera.y>800&&p->hp>0)
+    {
+        camera.y -= scrollspeed;
+    }
+    //camera.y -= scrollspeed;
 
     // カメラ上限制御
     if (camera.y < WINDOW_HEIGHT / 2)

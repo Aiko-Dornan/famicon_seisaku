@@ -109,7 +109,12 @@ int CPbullet::Action(vector<unique_ptr<BaseVector>>&base)
 					enemy->anime_time = enemy->re_anime_time;
 					//‚±‚±‚Å“G‚ÌHP‚ðŒ¸‚ç‚·
 					//CEnemyBase* enemy = (CEnemyBase*)Get_obj(base, ENEMY);
-					(*i)->hp -= 1;  // © HP‚ðŒ¸‚ç‚·I
+					if (enemy->invincible_time<0)
+					{
+						(*i)->hp -= 1;  // © HP‚ðŒ¸‚ç‚·I
+						enemy->invincible_time = enemy->re_anime_time;
+					}
+					
 				
 
 			

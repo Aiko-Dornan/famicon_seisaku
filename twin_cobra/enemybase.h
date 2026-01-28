@@ -86,6 +86,9 @@ public:
 	int stop_moving_time{ 30 };
 	int allow_moving_time{ 30 };
 	int move_limit{ 570 };
+	bool fire_right{ true };
+	int rl_fire{ 0 };
+	int invincible_time{ 5 };
 
 };
 

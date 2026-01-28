@@ -124,18 +124,34 @@ void CEnemyBase::Fire(std::vector<std::unique_ptr<BaseVector>>& base, Point targ
             // 拡散角度 (ラジアン)
             float spreadAngle = 0.2f; // ±0.2ラジアン（約11.5度）
             float angles[5] = { -spreadAngle*2, -spreadAngle, 0.0f, spreadAngle,spreadAngle*2 };
-
-            for (int i = 0; i < 5; i++)
+            
+            if (fire_right)
             {
-                float cosA = cosf(angles[i]);
-                float sinA = sinf(angles[i]);
-
-
-                bulletDir.x = dir.x * cosA - dir.y * sinA;
-                bulletDir.y = dir.x * sinA + dir.y * cosA;
-
-                base.emplace_back((unique_ptr<BaseVector>)new CEbullet(pos, bulletDir));
+                fire_right=false;
+                rl_fire = 12;
             }
+            else
+            {
+                fire_right = true;
+                rl_fire = 42;
+               
+            }
+                for (int i = 0; i < 5; i++)
+                {
+                    float cosA = cosf(angles[i]);
+                    float sinA = sinf(angles[i]);
+
+                    Point firePos;
+                    firePos.x = pos.x + rl_fire;
+                    firePos.y = pos.y + ImgHeight-20;
+
+                    bulletDir.x = dir.x * cosA - dir.y * sinA;
+                    bulletDir.y = dir.x * sinA + dir.y * cosA;
+
+                    base.emplace_back((unique_ptr<BaseVector>)new CEbullet(firePos, bulletDir));
+                }
+            
+           
 
             break;
         }
@@ -357,7 +373,7 @@ void  CEnemyBase::Animetion(vector<unique_ptr<BaseVector>>& base)
             else
             {
                 anime_time--;
-
+                invincible_time--;
             }
         }
         break;
@@ -365,6 +381,9 @@ void  CEnemyBase::Animetion(vector<unique_ptr<BaseVector>>& base)
         
     case DIE:
         DrawFormatString(pos.x, pos.y, GetColor(255, 255, 255), "Die\nDie\nDie");
+
+        vec.x = 0.0f;
+        vec.y = 0.0f;
 
         if (anime_time < 0 && anime_flame < 5)
         {
