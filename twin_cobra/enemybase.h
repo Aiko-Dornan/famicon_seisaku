@@ -90,5 +90,8 @@ public:
 	int rl_fire{ 0 };
 	int invincible_time{ 5 };
 
+	int score{ 0 };
+	int hit_score{ 0 };
+	int die_score{ 0 };
 };
 

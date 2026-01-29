@@ -17,7 +17,7 @@ CBackGround::CBackGround()
     ImgHeight = 6301;
 
     camera.x = WINDOW_WIDTH / 2;
-    camera.y = /*ImgHeight*/3000- WINDOW_HEIGHT / 2; // 最初は一番下から開始
+    camera.y = ImgHeight/*3000*/- WINDOW_HEIGHT / 2; // 最初は一番下から開始
 
     ID = BACKGROUND;
    
@@ -74,6 +74,24 @@ int CBackGround::Action(vector<unique_ptr<BaseVector>>& base)
 
     // vecリセット
     p->vec = { 0.0f, 0.0f };
+
+    if (camera.y < WINDOW_HEIGHT/1.5)
+    {
+        p->isGameClear = true;
+        if (p->pos.y>115)
+        {
+            p->vec.y = -3.0f;
+        }
+        if (p->pos.x > 247)
+        {
+            p->vec.x = -3.0f;
+        }
+        if (p->pos.x < 243)
+        {
+            p->vec.x = 3.0f;
+        }
+
+    }
 
     return 0;
 }

@@ -2,6 +2,7 @@
 #include "DxLib.h"
 #include "Scene_Manager.h"
 #include "game.h"
+#include"title.h"
 #include "function.h"
 #include"player.h"
 #include"background.h"
@@ -103,6 +104,8 @@ int CGame::Update(){
 	//	}
 	//}
 
+
+
 	for (auto& s : SpawnList)
 	{
 		if (!s.spawned &&
@@ -133,6 +136,70 @@ int CGame::Update(){
 	}
 
 	prevPlayerY = p->m_pos.y;
+
+	if (p && p->requestRespawn)
+	{
+		float respawnY = p->deadY + RESPAWN_BACK_Y;
+
+		// 下限（ステージ最初より戻らない）
+		if (respawnY > bg->stageStartY - WINDOW_HEIGHT / 2)
+			respawnY = bg->stageStartY-WINDOW_HEIGHT/2;
+
+		// プレイヤー復活
+		p->m_pos.y = respawnY;
+		p->hp = p->maxhp;
+		p->player_state = p->STATE_IDLE;
+		p->requestRespawn = false;
+		p->bomb_num = 2;
+		p->bullet_num = 1;
+		p->bullet_id = 0;
+
+		p->arrive_flag = true;
+		
+		p->anime_flame_t = 0;
+		p->anime_flame = 2;
+		p->die_anime_flag = false;
+
+		// 背景スクロールも巻き戻す
+		bg->camera.y = respawnY;
+
+		// 敵スポーンリセット
+		ResetEnemySpawn(respawnY-WINDOW_HEIGHT);
+
+		for (auto it = base.begin(); it != base.end();)
+		{
+			if ((*it)->ID == ENEMY)
+				it = base.erase(it);
+			else
+				++it;
+		}
+
+		for (auto it = base.begin(); it != base.end();)
+		{
+			if ((*it)->ID == ITEM)
+				it = base.erase(it);
+			else
+				++it;
+		}
+
+	}
+
+	if (p && p->isGameOver|| p && p->isGameClear)
+	{
+		static bool prevSpace = false;
+		bool nowSpace = CheckHitKey(KEY_INPUT_TAB);
+
+		// 押した瞬間だけ反応
+		if (nowSpace && !prevSpace)
+		{
+			CManager* m = manager;   // ← 先に保存！
+			delete m->scene;
+			m->scene = new CTitle(m);
+			return 0;
+		}
+
+		prevSpace = nowSpace;
+	}
 
 	//更新処理
 	for (int i = 0; i < base.size(); i++)
@@ -186,5 +253,16 @@ void CGame::Draw()
 CGame::~CGame()
 {
 
+}
+
+void CGame::ResetEnemySpawn(float respawnY)
+{
+	for (auto& s : SpawnList)
+	{
+		if (s.spawnY <= respawnY)
+		{
+			s.spawned = false;
+		}
+	}
 }
 

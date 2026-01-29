@@ -15,5 +15,5 @@ public:
 
 	bool Fwd_Bwd_Flag{ true };
 	bool limit{ false };
-
+	int ForcedFoward{ 125 };
 };

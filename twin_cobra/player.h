@@ -19,9 +19,9 @@ public:
 	Point m_pos{ 0,0 };
 
 	int fire_cooldown{ 10 };
-	//int hp{ 10 };
+	int maxhp{ 10 };
 	int bullet_num{ 1 };
-	int bomb_num{ 2 };
+	int bomb_num{ 3 };
 	int bomb_interval{ 20 };
 	bool bomb_flag{ true };
 	int anime_flame{ 0 };
@@ -45,4 +45,13 @@ public:
 
 	int anime_time{ 5 };
 	int re_anime_time{ 5 };
+
+	int total_score{ 0 };
+
+	int RemainLife{ 2 };
+	bool requestReturnTitle = false;
+	float deadY = 0.0f;
+	bool requestRespawn = false;
+	bool isGameOver = false;
+	bool isGameClear = false;
 };

@@ -67,7 +67,7 @@ void CEnemyBase::Fire(std::vector<std::unique_ptr<BaseVector>>& base, Point targ
             dir.y = 1.0f; // y方向の速度
 
             // 拡散角度（ラジアン）
-            float spreadAngle = 0.2f; // ±0.2ラジアン（約11.5度）
+            float spreadAngle = 0.45f; // ±0.2ラジアン（約11.5度）
             float angles[3] = { -spreadAngle, 0.0f, spreadAngle };
 
             for (int i = 0; i < 3; i++)
@@ -122,7 +122,7 @@ void CEnemyBase::Fire(std::vector<std::unique_ptr<BaseVector>>& base, Point targ
             }
 
             // 拡散角度 (ラジアン)
-            float spreadAngle = 0.2f; // ±0.2ラジアン（約11.5度）
+            float spreadAngle = 0.45f; // ±0.2ラジアン（約11.5度）
             float angles[5] = { -spreadAngle*2, -spreadAngle, 0.0f, spreadAngle,spreadAngle*2 };
             
             if (fire_right)
@@ -173,8 +173,8 @@ void CEnemyBase::Die(vector<unique_ptr<BaseVector>>& base)
     vec.x = 0.0f;
     vec.y = 0.0f;
 
-    
-   
+    CPlayer* p = (CPlayer*)Get_obj(base, PLAYER);
+    p->total_score += die_score;
     
     arrive_flag = false;
     if (!arrive_flag && /*situation == DIE &&*/ !die_anime_flag)
@@ -380,7 +380,7 @@ void  CEnemyBase::Animetion(vector<unique_ptr<BaseVector>>& base)
 
         
     case DIE:
-        DrawFormatString(pos.x, pos.y, GetColor(255, 255, 255), "Die\nDie\nDie");
+        
 
         vec.x = 0.0f;
         vec.y = 0.0f;

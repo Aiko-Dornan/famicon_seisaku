@@ -111,6 +111,7 @@ int CPbullet::Action(vector<unique_ptr<BaseVector>>&base)
 					//CEnemyBase* enemy = (CEnemyBase*)Get_obj(base, ENEMY);
 					if (enemy->invincible_time<0)
 					{
+						p->total_score += enemy->hit_score;
 						(*i)->hp -= 1;  // © HP‚ðŒ¸‚ç‚·I
 						enemy->invincible_time = enemy->re_anime_time;
 					}

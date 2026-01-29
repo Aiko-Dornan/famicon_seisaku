@@ -30,7 +30,7 @@ CBonusHeliEnemy::CBonusHeliEnemy(float fx, float fy)
 
 	hp = 10;
 
-	fire_cooldown = 40;
+	fire_cooldown = 75;
 	refire_cooldown = fire_cooldown;
 
 	radius = 16;
@@ -44,7 +44,8 @@ CBonusHeliEnemy::CBonusHeliEnemy(float fx, float fy)
 
 	appear = true;
 
-	
+	hit_score = 100;
+	die_score = 500;
 	
 	switchDistance = 200.0f;      // ƒvƒŒƒCƒ„[’Ç”ö‚ÉØ‘Ö‚¦‚é‹——£
 }
@@ -124,7 +125,7 @@ void CBonusHeliEnemy::Draw()
 
 
 
-	DrawFormatString(drawX, drawY, GetColor(255, 255, 255), "%d", hp);
+	//DrawFormatString(drawX, drawY, GetColor(255, 255, 255), "%d", hp);
 
 	DrawRectGraph(
 		drawX, drawY,

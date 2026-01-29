@@ -92,7 +92,7 @@ void CBomb::Explosion(vector<unique_ptr<BaseVector>>& base)
 
 void CBomb::Draw()
 {
-	DrawCircle(pos.x, pos.y, radius, GetColor(255, 0, 255), true);
+	DrawCircle(pos.x, pos.y, radius, GetColor(255, 255, 0), true);
 
 
 }

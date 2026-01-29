@@ -193,6 +193,7 @@ void CItemBase::ItemGet(vector<unique_ptr<BaseVector>>&base)
 		
 		break;
 	case CItemBase::Bomb:
+		if(p->bomb_num<7)
 		p->bomb_num++ ;
 		
 		break;

@@ -3,6 +3,7 @@
 #include"background.h"
 #include"bomb.h"
 
+
 CPlayer::CPlayer()
 {
 	//img = _img;
@@ -18,10 +19,10 @@ CPlayer::CPlayer()
 	//pos.x = WINDOW_WIDTH/2;
 	//pos.y = 6000;
 
-	hp = 30000;
-
+	hp = 3;
+	maxhp = hp;
 	m_pos.x = WINDOW_WIDTH / 2;
-	m_pos.y = /*6150;*/3000;
+	m_pos.y = 6150;/*3000;*/
 
 	pos = m_pos;
 
@@ -46,48 +47,100 @@ int CPlayer::Action(vector<unique_ptr<BaseVector>>& base) {
 	
 	CutX =anime_flame * ImgWidth;
 	CutY = anime_flame_t * ImgHeight;
-	if (CheckHitKey(KEY_INPUT_W))
-	{
-		vec.y -= 3.0f;
-	}
-	if (CheckHitKey(KEY_INPUT_S))
-	{
-		vec.y += 3.0f;
-	}
-	if (CheckHitKey(KEY_INPUT_A))
-	{
-		vec.x -= 3.0f;
-	}
-	if (CheckHitKey(KEY_INPUT_D))
-	{
-		vec.x += 3.0f;
-	}
-	if (CheckHitKey(KEY_INPUT_F)&&bomb_num>0&&bomb_interval<0&&bomb_flag)
-	{
-		base.emplace_back((unique_ptr<BaseVector>)new CBomb(pos));
-		bomb_num--;
-		bomb_interval = 20;
-		bomb_flag = false;
-	}
-	else if (!CheckHitKey(KEY_INPUT_F))
-	{
-		
-		bomb_flag = true;
-	}
-	bomb_interval--;
 
-	if (CheckHitKey(KEY_INPUT_SPACE)&&fire_cooldown<0)
+	if (hp > 0&&!isGameClear)
 	{
-		//base.emplace_back((unique_ptr<BaseVector>)new CPbullet(pos.x,pos.y));
-		Fire(base);
-	}
-	fire_cooldown--;
+		if (CheckHitKey(KEY_INPUT_W))
+		{
+			vec.y -= 3.0f;
+		}
+		if (CheckHitKey(KEY_INPUT_S))
+		{
+			vec.y += 3.0f;
+		}
+		if (CheckHitKey(KEY_INPUT_A))
+		{
+			vec.x -= 3.0f;
+		}
+		if (CheckHitKey(KEY_INPUT_D))
+		{
+			vec.x += 3.0f;
+		}
+		if (CheckHitKey(KEY_INPUT_F) && bomb_num > 0 && bomb_interval < 0 && bomb_flag)
+		{
+			base.emplace_back((unique_ptr<BaseVector>)new CBomb(pos));
+			bomb_num--;
+			bomb_interval = 20;
+			bomb_flag = false;
+		}
+		else if (!CheckHitKey(KEY_INPUT_F))
+		{
 
-	if (hp<0)
+			bomb_flag = true;
+		}
+		bomb_interval--;
+
+		if (CheckHitKey(KEY_INPUT_SPACE) && fire_cooldown < 0)
+		{
+			//base.emplace_back((unique_ptr<BaseVector>)new CPbullet(pos.x,pos.y));
+			Fire(base);
+		}
+		fire_cooldown--;
+
+
+	}
+	
+	if (hp <= 0)
 	{
+		player_state = STATE_DIE;
+		arrive_flag = false;
+
+		if (!requestRespawn && RemainLife > 0&& CheckHitKey(KEY_INPUT_TAB))
+		{
+			RemainLife--;
+			deadY = m_pos.y;
+			requestRespawn = true;
+		}
+		else if (RemainLife <= 0)
+		{
+			isGameOver = true;
+			if (CheckHitKey(KEY_INPUT_TAB))
+			{
+				requestReturnTitle = true;
+			}
+		}
+	}
+
+	/*if (hp<=0)
+	{
+		isGameOver = true;
 		arrive_flag = false;
 		player_state = STATE_DIE;
-	}
+
+		if (RemainLife<=0)
+		{
+			if (CheckHitKey(KEY_INPUT_TAB))
+			{
+				requestReturnTitle = true;
+			}
+		}
+		else
+		{
+			
+			if (CheckHitKey(KEY_INPUT_R))
+			{
+				deadY = m_pos.y;
+				RemainLife--;
+				arrive_flag = true;
+				player_state = STATE_IDLE;
+				anime_flame_t = 0;
+				anime_flame = 2;
+				hp = 3;
+				die_anime_flag = false;
+			}
+		}
+		
+	}*/
 
 	if (m_pos.x>=WINDOW_WIDTH-ImgWidth)
 	{
@@ -125,6 +178,8 @@ int CPlayer::Action(vector<unique_ptr<BaseVector>>& base) {
 
 		
 	}
+
+	
 
 	switch (player_state)
 	{
@@ -211,6 +266,35 @@ void CPlayer::Draw()
 		ImgWidth, ImgHeight,
 		img, true
 	);
+	DrawFormatString(72, 24, GetColor(255, 255, 255), "SCORE:%d", total_score);
+
+	int img_bomb = LoadGraph("img\\item_bomb_mini.png");
+	for (int i = 0; i < bomb_num; i++)
+	{
+
+		DrawGraph(WINDOW_WIDTH - 36 -(36* i), WINDOW_HEIGHT-36, img_bomb, true);
+
+	}
+
+	int img_life = LoadGraph("img\\RemainLife.png");
+	for (int i = 0; i < RemainLife; i++)
+	{
+
+		DrawGraph( 36 + (16 * i), WINDOW_HEIGHT - 36, img_life, true);
+
+	}
+
+	if (RemainLife <= 0&& player_state == STATE_DIE)
+	{
+		int img_go = LoadGraph("img\\GameOverP.png");
+		DrawGraph(0, 0, img_go, true);
+	}
+
+	if (isGameClear)
+	{
+		int img_gc = LoadGraph("img\\GameClear.png");
+		DrawGraph(0, 0, img_gc, true);
+	}
 
 	DrawFormatString(pos.x - 50, pos.y + 30, GetColor(255, 255, 255), "bull:%d,bomb:%d", bullet_num, bomb_num);
 	DrawFormatString(pos.x-50, pos.y+50, GetColor(255, 255, 255), "%d", anime_time);

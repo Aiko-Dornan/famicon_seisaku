@@ -19,7 +19,7 @@ CBossEnemy::CBossEnemy(float fx, float fy)
 
 	ID = ENEMY;
 
-	hp = 100;
+	hp = 200;
 
 	fire_cooldown = 45;
 	refire_cooldown = fire_cooldown;
@@ -39,7 +39,9 @@ CBossEnemy::CBossEnemy(float fx, float fy)
 	if (g_BackGround)
 		g_BackGround->stopScroll = true;
 
-	
+	hit_score = 300;
+	die_score = 2000;
+
 }
 
 int CBossEnemy::Action(vector<unique_ptr<BaseVector>>& base)
@@ -53,63 +55,72 @@ int CBossEnemy::Action(vector<unique_ptr<BaseVector>>& base)
 	drawX = pos.x - g_BackGround->camera.x + WINDOW_WIDTH / 2;
 	drawY = pos.y - g_BackGround->camera.y + WINDOW_HEIGHT / 2;
 
-
-
-	if (stop_flag)
+	if (ForcedFoward > 0)
 	{
-		stop_moving_time--;
-		vec.y = 0.0f;
-		anime_flame = 0;
-		if (stop_moving_time<0)
-		{
-			stop_flag = false;
-			allow_moving_time = 45;
-		}
-
-		//if (pos.y > move_limit && p->m_pos.y - drawY > 50&&!limit)
-		//{
-		//	Fwd_Bwd_Flag = false;
-		//}
-		//else
-		//{
-		//	limit = true;
-		//	//Fwd_Bwd_Flag = true;
-		//}
-	
-		switch (GetRand(1))
-		{
-		case 0:
-			if (pos.y > move_limit)
-			{
-				Fwd_Bwd_Flag = false;
-				break;
-			}
-			
-		case 1:
-			if (pos.y < 800)
-			{
-				Fwd_Bwd_Flag = true;
-				break;
-			}
-		default:
-			Fwd_Bwd_Flag = false;
-			break;
-		}
-
+		vec.y = 2.0f;
+		ForcedFoward--;
+		
 	}
 	else
 	{
-		vec.y =Fwd_Bwd_Flag? 0.7f: -0.7f;
-		
-		allow_moving_time--;
-
-		if (allow_moving_time<0)
+		if (stop_flag)
 		{
-			stop_flag = true;
-			stop_moving_time = 45;
-		}
+			stop_moving_time--;
+			vec.y = 0.0f;
+			anime_flame = 0;
+			if (stop_moving_time < 0)
+			{
+				stop_flag = false;
+				allow_moving_time = 45;
+			}
 
+			//if (pos.y > move_limit && p->m_pos.y - drawY > 50&&!limit)
+			//{
+			//	Fwd_Bwd_Flag = false;
+			//}
+			//else
+			//{
+			//	limit = true;
+			//	//Fwd_Bwd_Flag = true;
+			//}
+
+			switch (GetRand(1))
+			{
+			case 0:
+				if (pos.y > move_limit)
+				{
+					Fwd_Bwd_Flag = false;
+					break;
+				}
+
+			case 1:
+				if (pos.y < 800)
+				{
+					Fwd_Bwd_Flag = true;
+					break;
+				}
+			default:
+				Fwd_Bwd_Flag = false;
+				break;
+			}
+
+		}
+		else
+		{
+			vec.y = Fwd_Bwd_Flag ? 1.0f : -1.0f;
+
+			allow_moving_time--;
+
+			if (allow_moving_time < 0)
+			{
+				stop_flag = true;
+				stop_moving_time = 45;
+			}
+
+		}
 	}
+
+	
 
 	
 

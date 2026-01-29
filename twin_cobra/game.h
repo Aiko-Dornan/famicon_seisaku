@@ -34,12 +34,14 @@ public:
 	int Update();//更新処理
 	void Draw();//描画処理
 
-	
+	void ResetEnemySpawn(float respawnY);
 
 	//マップマネージャー
 	CMap* map;
 
 	vector<EnemySpawnData> SpawnList;
+
+	const float RESPAWN_BACK_Y = 600.0f;
 
 	//CCamera* camera;//カメラオブジェクト
 };

@@ -17,6 +17,7 @@ public:
 
 	float scrollspeed{ 0.5f };
 	bool stopScroll{ false };
+	float stageStartY{ 6301 };
 
 	int tipNo{ -1 };
 

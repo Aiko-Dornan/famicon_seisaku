@@ -32,7 +32,7 @@ CTitle::CTitle(CManager* p) :CScene(p) {
 	}*/
 
 
-
+	allow = false;
 
 
 }
@@ -41,11 +41,11 @@ CTitle::CTitle(CManager* p) :CScene(p) {
 int CTitle::Update() {
 
 
-	if (GetMouseInput() & MOUSE_INPUT_LEFT || CheckHitKey(KEY_INPUT_SPACE))
+	if (/*GetMouseInput() & MOUSE_INPUT_LEFT || */CheckHitKey(KEY_INPUT_SPACE)/*&&!allow*/)
 	{
 		//シーン管理クラス
 		//CManager* manager = new CManager();
-
+		allow = true;
 		DrawFormatString(0, 0, GetColor(255, 255, 255), "Object_Count = aaaaaaaaaaaaaaaaaaaaaaaaa\naaaaaa");
 		//ゲームシーンの生成
 		// 今のシーンを削除

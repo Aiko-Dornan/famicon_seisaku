@@ -38,6 +38,10 @@ CCannonEnemy::CCannonEnemy(float fx, float fy)
 	situation = EnemySitu::ROTATE;
 	HeliORTurretRotate = 1;
 	break_flag = true;
+
+	hit_score = 50;
+	die_score = 100;
+
 }
 
 int CCannonEnemy::Action(vector<unique_ptr<BaseVector>>& base)
@@ -89,7 +93,7 @@ void CCannonEnemy::Draw()
 
 	if (!g_BackGround) return;
 
-	DrawFormatString(drawX+40, drawY, GetColor(255, 255, 255), "%d", anime_flame);
+	//DrawFormatString(drawX+40, drawY, GetColor(255, 255, 255), "%d", anime_flame);
 
 	//DrawFormatString(drawX, drawY, GetColor(255, 255, 255), "%f,%f", pos.x, pos.y);
 

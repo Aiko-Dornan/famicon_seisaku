@@ -40,6 +40,9 @@ CHeliEnemy::CHeliEnemy(float fx, float fy)
 	HeliORTurretRotate = 2;
 	state = EnemyState::Approach; // 初期状態は直進
 	switchDistance = 400.0f;      // プレイヤー追尾に切替える距離
+
+	hit_score = 10;
+	die_score = 100;
 }
 
 int CHeliEnemy::Action(vector<unique_ptr<BaseVector>>& base)
@@ -130,8 +133,8 @@ void CHeliEnemy::Draw()
 
 
 
-	DrawFormatString(drawX + 40, drawY, GetColor(255, 255, 255), "%d", anime_flame);
-	DrawFormatString(drawX - 40, drawY, GetColor(255, 255, 255), "%d", anime_time);
+	//DrawFormatString(drawX + 40, drawY, GetColor(255, 255, 255), "%d", anime_flame);
+	//DrawFormatString(drawX - 40, drawY, GetColor(255, 255, 255), "%d", anime_time);
 
 	DrawRectGraph(
 		drawX, drawY,

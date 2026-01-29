@@ -26,7 +26,7 @@ public:
 	void Draw();//描画処理
 
 	int img{ -1 };
-
+	bool allow{ false };
 	//マップマネージャー
 	//CMap* map;
 
