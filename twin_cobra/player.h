@@ -48,7 +48,7 @@ public:
 
 	int total_score{ 0 };
 
-	int RemainLife{ 2 };
+	int RemainLife{ 5 };
 	bool requestReturnTitle = false;
 	float deadY = 0.0f;
 	bool requestRespawn = false;

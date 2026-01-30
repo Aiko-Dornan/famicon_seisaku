@@ -230,7 +230,7 @@ int CPlayer::Action(vector<unique_ptr<BaseVector>>& base) {
 		anime_time--;
 		break;
 	case STATE_DIE:
-		DrawFormatString(pos.x, pos.y, GetColor(255, 255, 255), "Die\nDie\nDie");
+		//DrawFormatString(pos.x, pos.y, GetColor(255, 255, 255), "Die\nDie\nDie");
 		
 		if (anime_time<0&&anime_flame<5)
 		{
@@ -296,8 +296,8 @@ void CPlayer::Draw()
 		DrawGraph(0, 0, img_gc, true);
 	}
 
-	DrawFormatString(pos.x - 50, pos.y + 30, GetColor(255, 255, 255), "bull:%d,bomb:%d", bullet_num, bomb_num);
-	DrawFormatString(pos.x-50, pos.y+50, GetColor(255, 255, 255), "%d", anime_time);
+//	DrawFormatString(pos.x - 50, pos.y + 30, GetColor(255, 255, 255), "bull:%d,bomb:%d", bullet_num, bomb_num);
+//	DrawFormatString(pos.x-50, pos.y+50, GetColor(255, 255, 255), "%d", anime_time);
 }
 
 void CPlayer::Fire(vector<unique_ptr<BaseVector>>&base)

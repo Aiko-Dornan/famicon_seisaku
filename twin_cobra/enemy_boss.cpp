@@ -165,7 +165,7 @@ void CBossEnemy::Draw()
 
 
 
-	DrawFormatString(drawX, drawY, GetColor(255, 255, 255), "%d", hp);
+	//DrawFormatString(drawX, drawY, GetColor(255, 255, 255), "%d", hp);
 
 	DrawRectGraph(
 		drawX, drawY,
